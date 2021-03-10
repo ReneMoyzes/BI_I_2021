@@ -2,18 +2,23 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>AW-SSIS</Name>
-    <LastWriteTime>2021-02-25T10:47:35.5537865Z</LastWriteTime>
+    <LastWriteTime>2021-03-04T11:01:07.0410968Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>SRCToDW_Product.dtsx</Name>
-      <LastWriteTime>2021-02-25T10:55:42.4691156Z</LastWriteTime>
+      <LastWriteTime>2021-03-04T10:33:37.5166798Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>SRCToDW_SalesOrderDetail.dtsx</Name>
-      <LastWriteTime>2021-02-25T11:05:24.8605749Z</LastWriteTime>
+      <Name>SRCToDW_SalesOrderDetail_Delta.dtsx</Name>
+      <LastWriteTime>2021-03-04T11:19:21.1412851Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>SRCToDW_SalesOrderDetail_TR.dtsx</Name>
+      <LastWriteTime>2021-03-04T10:33:37.3977535Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1029"
   DTS:ObjectName="SRCToDW_Product"
   DTS:PackageType="5"
-  DTS:VersionBuild="17"
-  DTS:VersionGUID="{775D03CA-0990-4001-8110-C31F0C507A6C}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{E5DB829B-F9EE-491C-AC79-ABC8D57562BC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>

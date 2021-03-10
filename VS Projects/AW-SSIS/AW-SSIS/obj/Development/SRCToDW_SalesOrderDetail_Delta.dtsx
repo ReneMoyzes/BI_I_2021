@@ -1,0 +1,1436 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/18/2021 10:54:50 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="X230"
+  DTS:CreatorName="X230\Rene.Moyzes"
+  DTS:DTSID="{4E1BF7FB-FB78-4633-A963-0C4C37490E02}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1029"
+  DTS:ObjectName="SRCToDW_SalesOrderDetail_Delta"
+  DTS:PackageType="5"
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{876D5045-12FB-444E-AFE3-33F9EFB6CD3C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL_AW_DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{859AE152-85D5-44E5-8A8F-A3FD42557493}"
+      DTS:ObjectName="OLEDB_SQL_AW_DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=X230\SQLSRV2017;Initial Catalog=AWDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_SQL_AW_OLTP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BEF09057-DFA2-4CAE-88BB-3A4746B089B5}"
+      DTS:ObjectName="OLEDB_SQL_AW_OLTP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=X230\SQLSRV2017;Initial Catalog=AdventureWorks2017;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{D575ABED-5D45-42AC-9614-545B2684B3F8}"
+      DTS:ObjectName="DestinationTableColumns">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">[SalesOrderID], [SalesOrderDetailID], [CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate]</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{34E47126-E8A9-493A-9140-AE599F35F332}"
+      DTS:ObjectName="DestSchemaName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">DW</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{58245369-A3CE-42A0-982C-DD86F7415205}"
+      DTS:ObjectName="DestTableName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">SalesOrderDetail</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{6BB08FEA-B548-479E-A522-6B5F0FD4C100}"
+      DTS:ObjectName="SourceTableName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">SalesOrderDetail</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{2C3EF70F-ECC5-4D14-B860-E0791BE93DAD}"
+      DTS:ObjectName="SourceTableSchema">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">Sales</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5DB0D601-3906-40D8-AEB2-015D2971137B}"
+      DTS:ObjectName="StageSchemaName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">STAGE</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{2C51B165-C0CD-4412-B257-E678B6E5E6A8}"
+      DTS:ObjectName="StageTableName">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">SalesOrderDetail_DELTA</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2204CC37-2B2D-4F67-B174-38DE819318F3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CurrentDeltaVersion">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7D28BD91-3D00-4B35-A63A-B30DB3C72E56}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastLoadedVersion">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{734E2F19-3485-4868-AFA2-0B24F996266B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RC">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C3781092-B7AC-48A3-B508-5BB5A14CE8CA}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression=" @[$Package::DestSchemaName] + &quot;.&quot; +@[$Package::DestTableName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_DF_DestTableFullName">
+      <DTS:VariableValue
+        DTS:DataType="8">DW.SalesOrderDetail</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{80F2D496-29CC-4853-A8CD-C95FA637B4BD}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT &quot;&#xA;+&#xA;@[$Package::DestinationTableColumns]&#xA;+&#xA;&quot;  FROM &quot; + @[$Package::SourceTableSchema] + &quot;.&quot; + @[$Package::SourceTableName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_DF_SourceSelect">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT [SalesOrderID], [SalesOrderDetailID], [CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate]  FROM Sales.SalesOrderDetail</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{825D1A01-C8B5-4E41-B2E4-914BCF74E9C9}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#x9;SELECT  &#xA;    CT.[SalesOrderDetailID],&#xA;&#x9;CT.[SalesOrderID],[CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate],&#xA;    CT.SYS_CHANGE_OPERATION&#xA;FROM  &#xA;   [Sales].[SalesOrderDetail] AS P  &#xA;RIGHT OUTER JOIN  &#xA;    CHANGETABLE(CHANGES [Sales].[SalesOrderDetail], &quot;+ @[User::LastLoadedVersion]+&quot; ) AS CT&#xA;ON &#xA;    P.SalesOrderID = CT.SalesOrderID &#xA;&#x9;AND &#xA;&#x9;P.[SalesOrderDetailID]=CT.[SalesOrderDetailID]&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_DF_SourceSelect_Delta">
+      <DTS:VariableValue
+        DTS:DataType="8">	SELECT  
+    CT.[SalesOrderDetailID],
+	CT.[SalesOrderID],[CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate],
+    CT.SYS_CHANGE_OPERATION
+FROM  
+   [Sales].[SalesOrderDetail] AS P  
+RIGHT OUTER JOIN  
+    CHANGETABLE(CHANGES [Sales].[SalesOrderDetail], 0 ) AS CT
+ON 
+    P.SalesOrderID = CT.SalesOrderID 
+	AND 
+	P.[SalesOrderDetailID]=CT.[SalesOrderDetailID]</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A4D83F0D-D255-4672-8A7F-40B3DAEB09EB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression=" @[$Package::StageSchemaName] + &quot;.&quot; +@[$Package::StageTableName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_DF_StageTableFullName">
+      <DTS:VariableValue
+        DTS:DataType="8">STAGE.SalesOrderDetail_DELTA</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{34AB03DB-59BD-48AD-A296-EDB4A23A423F}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;BEGIN TRAN&#xA;DELETE FROM &quot; + @[$Package::DestSchemaName] + &quot;.&quot; + @[$Package::DestTableName] + &quot; &#xA;INSERT INTO &quot; + @[$Package::DestSchemaName] + &quot;.&quot; + @[$Package::DestTableName] + &quot;&#xA;(&quot;&#xA;+&#xA;@[$Package::DestinationTableColumns]&#xA;+&#xA;&quot;&#xA;)&#xA;SELECT &quot;&#xA;+&#xA;@[$Package::DestinationTableColumns]&#xA;+&#xA;&quot;&#xA;&#xA;FROM &quot;&#xA; +@[$Package::StageSchemaName] + &quot;.&quot; +@[$Package::StageTableName] +&quot;&#xA;COMMIT TRAN&#xA;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_FromStageToDW">
+      <DTS:VariableValue
+        DTS:DataType="8">BEGIN TRAN
+DELETE FROM DW.SalesOrderDetail 
+INSERT INTO DW.SalesOrderDetail
+([SalesOrderID], [SalesOrderDetailID], [CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate]
+)
+SELECT [SalesOrderID], [SalesOrderDetailID], [CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate]
+
+FROM STAGE.SalesOrderDetail_DELTA
+COMMIT TRAN
+</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AC99A7EE-3D93-4ED7-8DF3-B09DF5AD7A52}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_FromStageToDW_Delta">
+      <DTS:VariableValue
+        DTS:DataType="8">BEGIN TRAN  DELETE FROM [DW].[SalesOrderDetail]  WHERE  EXISTS( SELECT 1 FROM [STAGE].[SalesOrderDetail_DELTA] D WHERE D.[SalesOrderDetailID] = [DW].[SalesOrderDetail].[SalesOrderDetailID] )  INSERT INTO DW.SalesOrderDetail ([SalesOrderID], [SalesOrderDetailID], [CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate] ) SELECT [SalesOrderID], [SalesOrderDetailID], [CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate]  FROM STAGE.SalesOrderDetail_DELTA WHERE _OPERATION &lt;&gt; 'D'  COMMIT TRAN</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C5A010AD-C053-4A52-A808-CDFD0130F335}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;TRUNCATE TABLE &quot; + @[$Package::StageSchemaName] + &quot;.&quot; + @[$Package::StageTableName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_TruncateStage">
+      <DTS:VariableValue
+        DTS:DataType="8">TRUNCATE TABLE STAGE.SalesOrderDetail_DELTA</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF_TableToStage"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{35B95CBE-3410-4C8D-AB54-7B5A38BF04F3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF_TableToStage">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferMaxRows="1000"
+          version="1">
+          <components>
+            <component
+              refId="Package\DF_TableToStage\DC_SystemColums"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DC_SystemColums"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DF_TableToStage\DC_SystemColums.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DC_SystemColums.Inputs[Derived Column Input].Columns[SYS_CHANGE_OPERATION]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="SYS_CHANGE_OPERATION"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SYS_CHANGE_OPERATION]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DF_TableToStage\DC_SystemColums.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Output].Columns[_OPERATION]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Output].Columns[_OPERATION]"
+                      name="_OPERATION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SYS_CHANGE_OPERATION]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">SYS_CHANGE_OPERATION</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Output].Columns[_LODADATE]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Output].Columns[_LODADATE]"
+                      name="_LODADATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::StartTime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::StartTime]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DF_TableToStage\DC_SystemColums.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_TableToStage\DST_OLEDB_AW_DW"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST_OLEDB_AW_DW"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable">User::SQL_DF_StageTableFullName</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">4</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL_AW_DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL_AW_DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[rowguid]"
+                      cachedDataType="guid"
+                      cachedName="rowguid"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[rowguid]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[ModifiedDate]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[SalesOrderID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderID"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderID]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SalesOrderID]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[SalesOrderDetailID]"
+                      cachedDataType="i4"
+                      cachedName="SalesOrderDetailID"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderDetailID]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SalesOrderDetailID]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[CarrierTrackingNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="CarrierTrackingNumber"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[CarrierTrackingNumber]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[CarrierTrackingNumber]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[OrderQty]"
+                      cachedDataType="i2"
+                      cachedName="OrderQty"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[OrderQty]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[OrderQty]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[SpecialOfferID]"
+                      cachedDataType="i4"
+                      cachedName="SpecialOfferID"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[SpecialOfferID]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SpecialOfferID]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[UnitPriceDiscount]"
+                      cachedDataType="cy"
+                      cachedName="UnitPriceDiscount"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[UnitPriceDiscount]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[UnitPriceDiscount]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[LineTotal]"
+                      cachedDataType="numeric"
+                      cachedName="LineTotal"
+                      cachedPrecision="38"
+                      cachedScale="6"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[LineTotal]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[LineTotal]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[_OPERATION]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="_OPERATION"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[_OPERATION]"
+                      lineageId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Output].Columns[_OPERATION]" />
+                    <inputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].Columns[_LODADATE]"
+                      cachedDataType="date"
+                      cachedName="_LODADATE"
+                      externalMetadataColumnId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[_LOAD_DATE]"
+                      lineageId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Output].Columns[_LODADATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderID]"
+                      dataType="i4"
+                      name="SalesOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[SalesOrderDetailID]"
+                      dataType="i4"
+                      name="SalesOrderDetailID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[CarrierTrackingNumber]"
+                      dataType="wstr"
+                      length="25"
+                      name="CarrierTrackingNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[OrderQty]"
+                      dataType="i2"
+                      name="OrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[SpecialOfferID]"
+                      dataType="i4"
+                      name="SpecialOfferID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[UnitPriceDiscount]"
+                      dataType="cy"
+                      name="UnitPriceDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[LineTotal]"
+                      dataType="cy"
+                      name="LineTotal" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[_OPERATION]"
+                      dataType="wstr"
+                      length="1"
+                      name="_OPERATION" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input].ExternalColumns[_LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      name="_LOAD_DATE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_TableToStage\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::RC</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DF_TableToStage\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF_TableToStage\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\DF_TableToStage\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC_OLEDB_AW_OLTP"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Production].[Product]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [ProductID]
+      ,[Name]
+      ,[ProductNumber]
+      ,[MakeFlag]
+      ,[FinishedGoodsFlag]
+      ,[Color]
+      ,[SafetyStockLevel]
+      ,[ReorderPoint]
+      ,[StandardCost]
+      ,[ListPrice]
+      ,[Size]
+      ,[SizeUnitMeasureCode]
+      ,[WeightUnitMeasureCode]
+      ,[Weight]
+      ,[DaysToManufacture]
+      ,[ProductLine]
+      ,[Class]
+      ,[Style]
+      ,[ProductSubcategoryID]
+      ,[ProductModelID]
+      ,[SellStartDate]
+      ,[SellEndDate]
+      ,[DiscontinuedDate]
+      ,[rowguid]
+      ,[ModifiedDate]
+  FROM [Production].[Product]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable">User::SQL_DF_SourceSelect_Delta</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[OLEDB_SQL_AW_OLTP]"
+                  connectionManagerRefId="Package.ConnectionManagers[OLEDB_SQL_AW_OLTP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[ProductID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[ProductID]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[rowguid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[rowguid]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[rowguid]"
+                      name="rowguid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SalesOrderID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderID]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SalesOrderID]"
+                      name="SalesOrderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SalesOrderDetailID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderDetailID]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SalesOrderDetailID]"
+                      name="SalesOrderDetailID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[CarrierTrackingNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[CarrierTrackingNumber]"
+                      length="25"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[CarrierTrackingNumber]"
+                      name="CarrierTrackingNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[OrderQty]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[OrderQty]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[OrderQty]"
+                      name="OrderQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SpecialOfferID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[SpecialOfferID]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SpecialOfferID]"
+                      name="SpecialOfferID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[UnitPriceDiscount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[UnitPriceDiscount]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[UnitPriceDiscount]"
+                      name="UnitPriceDiscount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[LineTotal]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[LineTotal]"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[LineTotal]"
+                      name="LineTotal"
+                      precision="38"
+                      scale="6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SYS_CHANGE_OPERATION]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[SYS_CHANGE_OPERATION]"
+                      length="1"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].Columns[SYS_CHANGE_OPERATION]"
+                      name="SYS_CHANGE_OPERATION"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[rowguid]"
+                      dataType="guid"
+                      name="rowguid" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderID]"
+                      dataType="i4"
+                      name="SalesOrderID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[SalesOrderDetailID]"
+                      dataType="i4"
+                      name="SalesOrderDetailID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[CarrierTrackingNumber]"
+                      dataType="wstr"
+                      length="25"
+                      name="CarrierTrackingNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[OrderQty]"
+                      dataType="i2"
+                      name="OrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[SpecialOfferID]"
+                      dataType="i4"
+                      name="SpecialOfferID" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[UnitPriceDiscount]"
+                      dataType="cy"
+                      name="UnitPriceDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[LineTotal]"
+                      dataType="numeric"
+                      name="LineTotal"
+                      precision="38"
+                      scale="6" />
+                    <externalMetadataColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output].ExternalColumns[SYS_CHANGE_OPERATION]"
+                      dataType="wstr"
+                      length="1"
+                      name="SYS_CHANGE_OPERATION" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[SalesOrderID]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[SalesOrderID]"
+                      name="SalesOrderID" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[SalesOrderDetailID]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[SalesOrderDetailID]"
+                      name="SalesOrderDetailID" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[CarrierTrackingNumber]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[CarrierTrackingNumber]"
+                      name="CarrierTrackingNumber" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[OrderQty]"
+                      dataType="i2"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[OrderQty]"
+                      name="OrderQty" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[SpecialOfferID]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[SpecialOfferID]"
+                      name="SpecialOfferID" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[UnitPriceDiscount]"
+                      dataType="cy"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[UnitPriceDiscount]"
+                      name="UnitPriceDiscount" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[LineTotal]"
+                      dataType="numeric"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[LineTotal]"
+                      name="LineTotal"
+                      precision="38"
+                      scale="6" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[rowguid]"
+                      dataType="guid"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[rowguid]"
+                      name="rowguid" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[SYS_CHANGE_OPERATION]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[SYS_CHANGE_OPERATION]"
+                      name="SYS_CHANGE_OPERATION" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF_TableToStage.Paths[Derived Column Output]"
+              endId="Package\DF_TableToStage\DST_OLEDB_AW_DW.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DF_TableToStage\DC_SystemColums.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DF_TableToStage.Paths[OLE DB Source Output]"
+              endId="Package\DF_TableToStage\Row Count.Inputs[Row Count Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\DF_TableToStage.Paths[Row Count Output 1]"
+              endId="Package\DF_TableToStage\DC_SystemColums.Inputs[Derived Column Input]"
+              name="Row Count Output 1"
+              startId="Package\DF_TableToStage\Row Count.Outputs[Row Count Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_FromStageToDW"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EE8AC923-D9B3-4451-B337-61F53E38D6F3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_FromStageToDW"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{859AE152-85D5-44E5-8A8F-A3FD42557493}"
+          SQLTask:SqlStmtSourceType="Variable"
+          SQLTask:SqlStatementSource="User::SQL_FromStageToDW_Delta" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_GetCurrentDeltaVersion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1E2EAFEF-A466-4CAA-8340-0C592826A43C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_GetCurrentDeltaVersion"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{859AE152-85D5-44E5-8A8F-A3FD42557493}"
+          SQLTask:SqlStatementSource="SELECT CHANGE_TRACKING_CURRENT_VERSION() AS CurrentVersion"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="CurrentVersion"
+            SQLTask:DtsVariableName="User::CurrentDeltaVersion" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_GetLastLoadedVersion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9D4F10ED-8B31-4238-928C-B39BD5E2EE78}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_GetLastLoadedVersion"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{859AE152-85D5-44E5-8A8F-A3FD42557493}"
+          SQLTask:SqlStatementSource="SELECT VERSION =&#xA;ISNULL(&#xA;(&#xA;&#x9;SELECT VERSION&#xA;&#x9;FROM [ETL].[DELTA_VERSIONS]&#xA;&#x9;WHERE SCHEMA_NAME = ? AND  TABLE_NAME= ?&#xA;),0)"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="VERSION"
+            SQLTask:DtsVariableName="User::LastLoadedVersion" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="$Package::SourceTableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="NewParameterName"
+            SQLTask:DtsVariableName="$Package::SourceTableSchema"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_SaveCurrentVersion"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3AC07268-BF30-4177-820A-06FC093E7421}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_SaveCurrentVersion"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{859AE152-85D5-44E5-8A8F-A3FD42557493}"
+          SQLTask:SqlStatementSource="UPDATE ETL.[DELTA_VERSIONS]&#xA;SET VERSION = ?&#xA;WHERE SCHEMA_NAME = ?&#xA; &#xA;AND TABLE_NAME  = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::CurrentDeltaVersion"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="$Package::SourceTableSchema"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="$Package::SourceTableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_Truncate_STAGE"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{08A385E9-2AAB-4204-8A4C-D2E95BADAA84}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_Truncate_STAGE"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{859AE152-85D5-44E5-8A8F-A3FD42557493}"
+          SQLTask:SqlStmtSourceType="Variable"
+          SQLTask:SqlStatementSource="User::SQL_TruncateStage" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::LastLoadedVersion"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{852F44D0-83F2-463A-88F5-BC937DD3FBDD}"
+      DTS:From="Package\SQL_Truncate_STAGE"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DF_TableToStage" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7C6EFBA1-06ED-4799-9545-D79895BC4F66}"
+      DTS:From="Package\DF_TableToStage"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\SQL_FromStageToDW" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{E7250B80-7C25-455F-BBA2-EA107FFA5B41}"
+      DTS:From="Package\SQL_GetCurrentDeltaVersion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\SQL_Truncate_STAGE" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{4BE35F33-BC43-469E-B98D-80CD67D15380}"
+      DTS:From="Package\SQL_GetLastLoadedVersion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\SQL_Truncate_STAGE" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{78E5CBAA-D5EF-4EDD-9EFF-F464AD365D50}"
+      DTS:From="Package\SQL_FromStageToDW"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\SQL_SaveCurrentVersion" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="162,42"
+          Id="Package\DF_TableToStage"
+          TopLeft="313.5,288.5" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\SQL_FromStageToDW"
+          TopLeft="300,383" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\SQL_Truncate_STAGE"
+          TopLeft="301,194" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="393.5,236">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.5"
+              Start="0,0"
+              End="0,45">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="393,330.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52.5"
+              Start="0,0"
+              End="0,45">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="214,42"
+          Id="Package\SQL_GetCurrentDeltaVersion"
+          TopLeft="185,44" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\SQL_GetLastLoadedVersion"
+          TopLeft="431,42" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="292,86">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="71.3333333333333,108"
+              Start="0,0"
+              End="71.3333333333333,100.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.2383531960997" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,60.2383531960997"
+                    Point2="0,64.2383531960997"
+                    Point3="4,64.2383531960997" />
+                  <mssgle:LineSegment
+                    End="67.3333333333333,64.2383531960997" />
+                  <mssgle:CubicBezierSegment
+                    Point1="67.3333333333333,64.2383531960997"
+                    Point2="71.3333333333333,64.2383531960997"
+                    Point3="71.3333333333333,68.2383531960997" />
+                  <mssgle:LineSegment
+                    End="71.3333333333333,100.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="535,84">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-113.333333333333,110"
+              Start="0,0"
+              End="-113.333333333333,102.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.4279523293608" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,61.4279523293608"
+                    Point2="0,65.4279523293608"
+                    Point3="-4,65.4279523293608" />
+                  <mssgle:LineSegment
+                    End="-109.333333333333,65.4279523293608" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-109.333333333333,65.4279523293608"
+                    Point2="-113.333333333333,65.4279523293608"
+                    Point3="-113.333333333333,69.4279523293608" />
+                  <mssgle:LineSegment
+                    End="-113.333333333333,102.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="196,42"
+          Id="Package\SQL_SaveCurrentVersion"
+          TopLeft="293,493" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="391.25,425">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68"
+              Start="0,0"
+              End="0,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DF_TableToStage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\DF_TableToStage\Row Count"
+          TopLeft="359,148" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\DF_TableToStage\DST_OLEDB_AW_DW"
+          TopLeft="332,353" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP"
+          TopLeft="322.5,42.5" />
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[OLE DB Source Output]"
+          TopLeft="420.5,84.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.5"
+              Start="0,0"
+              End="0,56">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="167,42"
+          Id="Package\DF_TableToStage\DC_SystemColums"
+          TopLeft="343,254" />
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[Row Count Output 1]"
+          TopLeft="425.25,190">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[Derived Column Output]"
+          TopLeft="424.5,296">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57"
+              Start="0,0"
+              End="0,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF_TableToStage\DST_OLEDB_AW_DW">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
