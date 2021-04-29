@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>AW-SSIS</Name>
-    <LastWriteTime>2021-04-15T09:09:54.0137503Z</LastWriteTime>
+    <LastWriteTime>2021-04-29T09:23:01.0541372Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -23,7 +23,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SRCToDW_SalesOrderDetail_DeltaDetect.dtsx</Name>
-      <LastWriteTime>2021-04-15T10:10:59.5191182Z</LastWriteTime>
+      <LastWriteTime>2021-04-29T09:36:40.0537725Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -32,8 +32,13 @@
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>Package1.dtsx</Name>
-      <LastWriteTime>2021-04-22T10:16:49.3235426Z</LastWriteTime>
+      <Name>CTR_AW_Sales.dtsx</Name>
+      <LastWriteTime>2021-04-29T09:23:01.0141612Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ClearStage.dtsx</Name>
+      <LastWriteTime>2021-04-29T09:37:55.501889Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

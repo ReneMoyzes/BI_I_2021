@@ -11,8 +11,8 @@
   DTS:LocaleID="1029"
   DTS:ObjectName="SRCToDW_SalesOrderDetail_DeltaDetect"
   DTS:PackageType="5"
-  DTS:VersionBuild="59"
-  DTS:VersionGUID="{3F440AF7-53A2-40B6-8B2E-DC5944D487ED}">
+  DTS:VersionBuild="60"
+  DTS:VersionGUID="{0AE2BE20-3501-4476-8B30-B0F24AAED1C2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -6053,49 +6053,65 @@ ORDER BY 1,2;</property>
       <GraphLayout
         Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="116,42"
+          Id="Package\DF_TableToStage\MLT_ID"
+          TopLeft="322.285714285714,550.793650793651" />
+        <NodeLayout
           Size="122,42"
           Id="Package\DF_TableToStage\RCDelete"
           TopLeft="1290.61904761905,569.5" />
-        <NodeLayout
-          Size="154,42"
-          Id="Package\DF_TableToStage\DER_SYS_COLS"
-          TopLeft="970.952380952381,1053.16666666667" />
-        <NodeLayout
-          Size="121,42"
-          Id="Package\DF_TableToStage\SRCHash"
-          TopLeft="876.619047619048,154.5" />
-        <NodeLayout
-          Size="142,42"
-          Id="Package\DF_TableToStage\SRC_AW_DW"
-          TopLeft="1252.61904761905,52.5" />
-        <NodeLayout
-          Size="121,42"
-          Id="Package\DF_TableToStage\Union All"
-          TopLeft="987.52380952381,959.880952380953" />
-        <NodeLayout
-          Size="130,42"
-          Id="Package\DF_TableToStage\Merge Join"
-          TopLeft="996.619047619048,368.5" />
-        <NodeLayout
-          Size="166,42"
-          Id="Package\DF_TableToStage\DER_ISNULLHASH"
-          TopLeft="1235.61904761905,176.5" />
         <NodeLayout
           Size="120,42"
           Id="Package\DF_TableToStage\SPL_IUD"
           TopLeft="1005.61904761905,463.5" />
         <NodeLayout
-          Size="126,42"
-          Id="Package\DF_TableToStage\RCUpdate"
-          TopLeft="985.666666666667,742.833333333333" />
+          Size="154,42"
+          Id="Package\DF_TableToStage\DER_SYS_COLS"
+          TopLeft="970.952380952381,1053.16666666667" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP"
+          TopLeft="846.119047619048,49" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\DF_TableToStage\Union All"
+          TopLeft="987.52380952381,959.880952380953" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\DF_TableToStage\LU_EXTID_ID"
+          TopLeft="732.063492063492,463.888888888889" />
         <NodeLayout
           Size="181,42"
           Id="Package\DF_TableToStage\DST_OLEDB_AW_DW"
           TopLeft="957.809523809524,1158.88095238095" />
         <NodeLayout
+          Size="166,42"
+          Id="Package\DF_TableToStage\DER_ISNULLHASH"
+          TopLeft="1235.61904761905,176.5" />
+        <NodeLayout
+          Size="109,42"
+          Id="Package\DF_TableToStage\DER_U"
+          TopLeft="988.285714285714,844.119047619047" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\DF_TableToStage\SRCHash"
+          TopLeft="876.619047619048,154.5" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\DF_TableToStage\Merge Join"
+          TopLeft="996.619047619048,368.5" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\DF_TableToStage\RCUpdate"
+          TopLeft="985.666666666667,742.833333333333" />
+        <NodeLayout
           Size="109,42"
           Id="Package\DF_TableToStage\DER_I"
           TopLeft="417.507936507937,862.460317460317" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\DF_TableToStage\UNI_EXID"
+          TopLeft="404.603174603175,698.412698412698" />
         <NodeLayout
           Size="140,42"
           Id="Package\DF_TableToStage\RCNoChange"
@@ -6105,50 +6121,58 @@ ORDER BY 1,2;</property>
           Id="Package\DF_TableToStage\RCInsert"
           TopLeft="412.079365079365,791.809523809524" />
         <NodeLayout
-          Size="109,42"
-          Id="Package\DF_TableToStage\DER_U"
-          TopLeft="988.285714285714,844.119047619047" />
+          Size="136,42"
+          Id="Package\DF_TableToStage\SCR_NewID"
+          TopLeft="316.825396825397,466.31746031746" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\DF_TableToStage\DER_SYS_COLS_FOR_IDS"
+          TopLeft="69.6507936507937,547.857142857143" />
         <NodeLayout
           Size="109,42"
           Id="Package\DF_TableToStage\DER_D"
           TopLeft="1296.90476190476,767.452380952381" />
         <NodeLayout
-          Size="189,42"
-          Id="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP"
-          TopLeft="846.119047619048,49" />
+          Size="142,42"
+          Id="Package\DF_TableToStage\SRC_AW_DW"
+          TopLeft="1252.61904761905,52.5" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\DF_TableToStage\DST_OLEDB_ID_Mapping"
+          TopLeft="62.8095238095239,626.039682539682" />
         <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[No Change]"
-          TopLeft="1125.61904761905,484.5">
+          Id="Package\DF_TableToStage.Paths[Multicast Output 2]"
+          TopLeft="380.285714285714,592.793650793651">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="247,-18"
+              EndConnector="67.6507936507936,105.619047619047"
               Start="0,0"
-              End="239.5,-18">
+              End="67.6507936507936,98.1190476190475">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="119.5,0" />
+                    End="0,58.5768025078369" />
                   <mssgle:CubicBezierSegment
-                    Point1="119.5,0"
-                    Point2="123.5,0"
-                    Point3="123.5,-4" />
+                    Point1="0,58.5768025078369"
+                    Point2="0,62.5768025078369"
+                    Point3="4,62.5768025078369" />
                   <mssgle:LineSegment
-                    End="123.5,-14" />
+                    End="63.6507936507936,62.5768025078369" />
                   <mssgle:CubicBezierSegment
-                    Point1="123.5,-14"
-                    Point2="123.5,-18"
-                    Point3="127.5,-18" />
+                    Point1="63.6507936507936,62.5768025078369"
+                    Point2="67.6507936507936,62.5768025078369"
+                    Point3="67.6507936507936,66.5768025078369" />
                   <mssgle:LineSegment
-                    End="239.5,-18" />
+                    End="67.6507936507936,98.1190476190475" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="98.77865234375,1,49.4426953125,11.6630859375"
+              BoundingBox="0,0,0,0"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -6171,7 +6195,129 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[Lookup No Match Output]"
+          TopLeft="732.063492063492,486.103174603175">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-279.238095238095,0"
+              Start="0,0"
+              End="-271.738095238095,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-271.738095238095,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-191.675434337798,5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[Lookup Match Output]"
+          TopLeft="804.063492063492,505.888888888889">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-316.793650793651,192.523809523809"
+              Start="0,0"
+              End="-316.793650793651,185.023809523809">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,110.065830721003" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,110.065830721003"
+                    Point2="0,114.065830721003"
+                    Point3="-4,114.065830721003" />
+                  <mssgle:LineSegment
+                    End="-312.793650793651,114.065830721003" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-312.793650793651,114.065830721003"
+                    Point2="-316.793650793651,114.065830721003"
+                    Point3="-316.793650793651,118.065830721003" />
+                  <mssgle:LineSegment
+                    End="-316.793650793651,185.023809523809" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-206.588212115575,119.065830721003,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[Insert]"
+          TopLeft="1005.61904761905,484.694444444444">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-129.555555555556,0"
+              Start="0,0"
+              End="-122.055555555556,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-122.055555555556,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-74.7807660590278,5,27.5059765625,9.40234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[Derived Column Output5]"
+          TopLeft="170.650793650794,589.857142857143">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8.34126984126982,36.1825396825396"
+              Start="0,0"
+              End="-8.34126984126982,28.6825396825396">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.0912698412698" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.0912698412698"
+                    Point2="0,18.0912698412698"
+                    Point3="-4,18.0912698412698" />
+                  <mssgle:LineSegment
+                    End="-4.34126984126982,18.0912698412698" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4.34126984126982,18.0912698412698"
+                    Point2="-8.34126984126982,18.0912698412698"
+                    Point3="-8.34126984126982,22.0912698412698" />
+                  <mssgle:LineSegment
+                    End="-8.34126984126982,28.6825396825396" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6193,7 +6339,9 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6227,7 +6375,9 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6261,7 +6411,9 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6295,7 +6447,9 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6317,7 +6471,9 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6381,6 +6537,30 @@ ORDER BY 1,2;</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[Union All Output 11]"
+          TopLeft="469.84126984127,740.412698412698">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.3968253968253"
+              Start="0,0"
+              End="0,43.8968253968253">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.8968253968253" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\DF_TableToStage.Paths[Union All Output 1]"
           TopLeft="1047.9880952381,1001.88095238095">
           <EdgeLayout.Curve>
@@ -6399,29 +6579,9 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[Row Count Output 11]"
-          TopLeft="1351.5119047619,611.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,155.952380952381"
-              Start="0,0"
-              End="0,148.452380952381">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,148.452380952381" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6443,7 +6603,33 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[Row Count Output 11]"
+          TopLeft="1351.5119047619,611.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,155.952380952381"
+              Start="0,0"
+              End="0,148.452380952381">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,148.452380952381" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6465,7 +6651,33 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[Output 01]"
+          TopLeft="382.555555555556,508.31746031746">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.4761904761905"
+              Start="0,0"
+              End="0,34.9761904761905">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.9761904761905" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6499,29 +6711,9 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[OLE DB Source Output]"
-          TopLeft="1321.11904761905,94.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,82"
-              Start="0,0"
-              End="0,74.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,74.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6543,111 +6735,71 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="136,42"
-          Id="Package\DF_TableToStage\SCR_NewID"
-          TopLeft="316.825396825397,466.31746031746" />
-        <NodeLayout
-          Size="199,42"
-          Id="Package\DF_TableToStage\DST_OLEDB_ID_Mapping"
-          TopLeft="62.8095238095239,626.039682539682" />
-        <NodeLayout
-          Size="202,42"
-          Id="Package\DF_TableToStage\DER_SYS_COLS_FOR_IDS"
-          TopLeft="69.6507936507937,547.857142857143" />
         <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[Derived Column Output5]"
-          TopLeft="170.650793650794,589.857142857143">
+          Id="Package\DF_TableToStage.Paths[OLE DB Source Output]"
+          TopLeft="1321.11904761905,94.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-8.34126984126982,36.1825396825396"
+              EndConnector="0,82"
               Start="0,0"
-              End="-8.34126984126982,28.6825396825396">
+              End="0,74.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,14.0912698412698" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.0912698412698"
-                    Point2="0,18.0912698412698"
-                    Point3="-4,18.0912698412698" />
-                  <mssgle:LineSegment
-                    End="-4.34126984126982,18.0912698412698" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-4.34126984126982,18.0912698412698"
-                    Point2="-8.34126984126982,18.0912698412698"
-                    Point3="-8.34126984126982,22.0912698412698" />
-                  <mssgle:LineSegment
-                    End="-8.34126984126982,28.6825396825396" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="144,42"
-          Id="Package\DF_TableToStage\LU_EXTID_ID"
-          TopLeft="732.063492063492,463.888888888889" />
-        <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[Insert]"
-          TopLeft="1005.61904761905,484.694444444444">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-129.555555555556,0"
-              Start="0,0"
-              End="-122.055555555556,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-122.055555555556,0" />
+                    End="0,74.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-74.7807660590278,5,27.5059765625,9.40234375"
+              BoundingBox="0,0,0,0"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[Lookup No Match Output]"
-          TopLeft="732.063492063492,486.103174603175">
+          Id="Package\DF_TableToStage.Paths[No Change]"
+          TopLeft="1125.61904761905,484.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-279.238095238095,0"
+              EndConnector="247,-18"
               Start="0,0"
-              End="-271.738095238095,0">
+              End="239.5,-18">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="-271.738095238095,0" />
+                    End="119.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="119.5,0"
+                    Point2="123.5,0"
+                    Point3="123.5,-4" />
+                  <mssgle:LineSegment
+                    End="123.5,-14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="123.5,-14"
+                    Point2="123.5,-18"
+                    Point3="127.5,-18" />
+                  <mssgle:LineSegment
+                    End="239.5,-18" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-191.675434337798,5,111.6127734375,11.609375"
+              BoundingBox="98.77865234375,1,49.4426953125,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="116,42"
-          Id="Package\DF_TableToStage\MLT_ID"
-          TopLeft="322.285714285714,550.793650793651" />
         <EdgeLayout
           Id="Package\DF_TableToStage.Paths[Multicast Output 3]"
           TopLeft="322.285714285714,570.325396825397">
@@ -6667,132 +6819,16 @@ ORDER BY 1,2;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[Output 01]"
-          TopLeft="382.555555555556,508.31746031746">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,42.4761904761905"
-              Start="0,0"
-              End="0,34.9761904761905">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.9761904761905" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="126,42"
-          Id="Package\DF_TableToStage\UNI_EXID"
-          TopLeft="404.603174603175,698.412698412698" />
-        <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[Multicast Output 2]"
-          TopLeft="380.285714285714,592.793650793651">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="67.6507936507936,105.619047619047"
-              Start="0,0"
-              End="67.6507936507936,98.1190476190475">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,58.5768025078369" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,58.5768025078369"
-                    Point2="0,62.5768025078369"
-                    Point3="4,62.5768025078369" />
-                  <mssgle:LineSegment
-                    End="63.6507936507936,62.5768025078369" />
-                  <mssgle:CubicBezierSegment
-                    Point1="63.6507936507936,62.5768025078369"
-                    Point2="67.6507936507936,62.5768025078369"
-                    Point3="67.6507936507936,66.5768025078369" />
-                  <mssgle:LineSegment
-                    End="67.6507936507936,98.1190476190475" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[Lookup Match Output]"
-          TopLeft="804.063492063492,505.888888888889">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-316.793650793651,192.523809523809"
-              Start="0,0"
-              End="-316.793650793651,185.023809523809">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,110.065830721003" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,110.065830721003"
-                    Point2="0,114.065830721003"
-                    Point3="-4,114.065830721003" />
-                  <mssgle:LineSegment
-                    End="-312.793650793651,114.065830721003" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-312.793650793651,114.065830721003"
-                    Point2="-316.793650793651,114.065830721003"
-                    Point3="-316.793650793651,118.065830721003" />
-                  <mssgle:LineSegment
-                    End="-316.793650793651,185.023809523809" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-206.588212115575,119.065830721003,96.3827734375,11.609375"
+              BoundingBox="0,0,0,0"
               RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[Union All Output 11]"
-          TopLeft="469.84126984127,740.412698412698">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,51.3968253968253"
-              Start="0,0"
-              End="0,43.8968253968253">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,43.8968253968253" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DF_TableToStage\SRC_AW_DW">
+    design-time-name="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6805,6 +6841,29 @@ ORDER BY 1,2;</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
+    design-time-name="Package\DF_TableToStage\LU_EXTID_ID">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\DF_TableToStage\DST_OLEDB_AW_DW">
     <Properties>
       <Property>
@@ -6813,7 +6872,7 @@ ORDER BY 1,2;</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP">
+    design-time-name="Package\DF_TableToStage\SRC_AW_DW">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -6835,29 +6894,6 @@ ORDER BY 1,2;</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DF_TableToStage\LU_EXTID_ID">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
