@@ -11,8 +11,8 @@
   DTS:LocaleID="1029"
   DTS:ObjectName="SRCToDW_SalesOrderDetail_Delta"
   DTS:PackageType="5"
-  DTS:VersionBuild="35"
-  DTS:VersionGUID="{876D5045-12FB-444E-AFE3-33F9EFB6CD3C}">
+  DTS:VersionBuild="41"
+  DTS:VersionGUID="{E4CD911F-5686-46FB-9EB3-55466B4E4E95}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -64,6 +64,16 @@
       <DTS:Property
         DTS:DataType="8"
         DTS:Name="ParameterValue">SalesOrderDetail</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:Description="I=Initial, D=Delta"
+      DTS:DTSID="{FD4B7F62-DD2E-49A3-9A8C-AE2892262AE7}"
+      DTS:ObjectName="LoadType">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">I</DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
@@ -143,14 +153,19 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{80F2D496-29CC-4853-A8CD-C95FA637B4BD}"
+      DTS:DTSID="{1D757F69-C953-429F-9C09-521ECADAD69E}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;SELECT &quot;&#xA;+&#xA;@[$Package::DestinationTableColumns]&#xA;+&#xA;&quot;  FROM &quot; + @[$Package::SourceTableSchema] + &quot;.&quot; + @[$Package::SourceTableName]"
+      DTS:Expression="@[User::LastLoadedVersion]!=&quot;0&quot;?@[User::SQL_DF_SourceSelect_Delta]:@[User::SQL_DF_SourceSelect_Full]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SQL_DF_SourceSelect">
       <DTS:VariableValue
-        DTS:DataType="8">SELECT [SalesOrderID], [SalesOrderDetailID], [CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate]  FROM Sales.SalesOrderDetail</DTS:VariableValue>
+        DTS:DataType="8">SELECT  
+    P.[SalesOrderDetailID],
+	P.[SalesOrderID],[CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate],
+    SYS_CHANGE_OPERATION = cast('I' as nvarchar(1))
+FROM  
+   [Sales].[SalesOrderDetail] AS P </DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -173,6 +188,22 @@ ON
     P.SalesOrderID = CT.SalesOrderID 
 	AND 
 	P.[SalesOrderDetailID]=CT.[SalesOrderDetailID]</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{80F2D496-29CC-4853-A8CD-C95FA637B4BD}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT  &#xA;    P.[SalesOrderDetailID],&#xA;&#x9;P.[SalesOrderID],[CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate],&#xA;    SYS_CHANGE_OPERATION = cast('I' as nvarchar(1))&#xA;FROM  &#xA;   [Sales].[SalesOrderDetail] AS P &quot;&#xA;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_DF_SourceSelect_Full">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT  
+    P.[SalesOrderDetailID],
+	P.[SalesOrderID],[CarrierTrackingNumber], [OrderQty], [ProductID], [SpecialOfferID], [UnitPrice], [UnitPriceDiscount], [LineTotal], [rowguid], [ModifiedDate],
+    SYS_CHANGE_OPERATION = cast('I' as nvarchar(1))
+FROM  
+   [Sales].[SalesOrderDetail] AS P </DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -667,7 +698,7 @@ COMMIT TRAN
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
-                  name="SqlCommandVariable">User::SQL_DF_SourceSelect_Delta</property>
+                  name="SqlCommandVariable">User::SQL_DF_SourceSelect</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -1000,11 +1031,11 @@ COMMIT TRAN
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQL_GetCurrentDeltaVersion"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{859AE152-85D5-44E5-8A8F-A3FD42557493}"
+          SQLTask:Connection="{BEF09057-DFA2-4CAE-88BB-3A4746B089B5}"
           SQLTask:SqlStatementSource="SELECT CHANGE_TRACKING_CURRENT_VERSION() AS CurrentVersion"
           SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ResultBinding
@@ -1017,12 +1048,15 @@ COMMIT TRAN
       DTS:refId="Package\SQL_GetLastLoadedVersion"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{9D4F10ED-8B31-4238-928C-B39BD5E2EE78}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQL_GetLastLoadedVersion"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Disable">@[$Package::LoadType]=="I"</DTS:PropertyExpression>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{859AE152-85D5-44E5-8A8F-A3FD42557493}"
@@ -1032,13 +1066,13 @@ COMMIT TRAN
             SQLTask:ResultName="VERSION"
             SQLTask:DtsVariableName="User::LastLoadedVersion" />
           <SQLTask:ParameterBinding
-            SQLTask:ParameterName="NewParameterName"
+            SQLTask:ParameterName="1"
             SQLTask:DtsVariableName="$Package::SourceTableName"
             SQLTask:ParameterDirection="Input"
             SQLTask:DataType="130"
             SQLTask:ParameterSize="-1" />
           <SQLTask:ParameterBinding
-            SQLTask:ParameterName="NewParameterName"
+            SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="$Package::SourceTableSchema"
             SQLTask:ParameterDirection="Input"
             SQLTask:DataType="130"
@@ -1059,9 +1093,9 @@ COMMIT TRAN
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{859AE152-85D5-44E5-8A8F-A3FD42557493}"
-          SQLTask:SqlStatementSource="UPDATE ETL.[DELTA_VERSIONS]&#xA;SET VERSION = ?&#xA;WHERE SCHEMA_NAME = ?&#xA; &#xA;AND TABLE_NAME  = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="EXECUTE [ETL].[UPDATEVERSION] ?,?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
-            SQLTask:ParameterName="0"
+            SQLTask:ParameterName="2"
             SQLTask:DtsVariableName="User::CurrentDeltaVersion"
             SQLTask:ParameterDirection="Input"
             SQLTask:DataType="129"
@@ -1073,7 +1107,7 @@ COMMIT TRAN
             SQLTask:DataType="129"
             SQLTask:ParameterSize="-1" />
           <SQLTask:ParameterBinding
-            SQLTask:ParameterName="2"
+            SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="$Package::SourceTableName"
             SQLTask:ParameterDirection="Input"
             SQLTask:DataType="129"
@@ -1169,6 +1203,18 @@ COMMIT TRAN
           Id="Package\SQL_FromStageToDW"
           TopLeft="300,383" />
         <NodeLayout
+          Size="214,42"
+          Id="Package\SQL_GetCurrentDeltaVersion"
+          TopLeft="185,44" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\SQL_GetLastLoadedVersion"
+          TopLeft="431,42" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\SQL_SaveCurrentVersion"
+          TopLeft="293,493" />
+        <NodeLayout
           Size="183,42"
           Id="Package\SQL_Truncate_STAGE"
           TopLeft="301,194" />
@@ -1216,14 +1262,6 @@ COMMIT TRAN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="214,42"
-          Id="Package\SQL_GetCurrentDeltaVersion"
-          TopLeft="185,44" />
-        <NodeLayout
-          Size="208,42"
-          Id="Package\SQL_GetLastLoadedVersion"
-          TopLeft="431,42" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="292,86">
@@ -1292,10 +1330,6 @@ COMMIT TRAN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="196,42"
-          Id="Package\SQL_SaveCurrentVersion"
-          TopLeft="293,493" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
           TopLeft="391.25,425">
@@ -1327,43 +1361,21 @@ COMMIT TRAN
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="189,42"
+          Id="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP"
+          TopLeft="322.5,42.5" />
+        <NodeLayout
           Size="130,42"
           Id="Package\DF_TableToStage\Row Count"
           TopLeft="359,148" />
         <NodeLayout
-          Size="181,42"
-          Id="Package\DF_TableToStage\DST_OLEDB_AW_DW"
-          TopLeft="332,353" />
-        <NodeLayout
-          Size="189,42"
-          Id="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP"
-          TopLeft="322.5,42.5" />
-        <EdgeLayout
-          Id="Package\DF_TableToStage.Paths[OLE DB Source Output]"
-          TopLeft="420.5,84.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,63.5"
-              Start="0,0"
-              End="0,56">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,56" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
           Size="167,42"
           Id="Package\DF_TableToStage\DC_SystemColums"
           TopLeft="343,254" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\DF_TableToStage\DST_OLEDB_AW_DW"
+          TopLeft="332,353" />
         <EdgeLayout
           Id="Package\DF_TableToStage.Paths[Row Count Output 1]"
           TopLeft="425.25,190">
@@ -1378,6 +1390,28 @@ COMMIT TRAN
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF_TableToStage.Paths[OLE DB Source Output]"
+          TopLeft="420.5,84.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.5"
+              Start="0,0"
+              End="0,56">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1412,14 +1446,6 @@ COMMIT TRAN
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DF_TableToStage\DST_OLEDB_AW_DW">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\DF_TableToStage\SRC_OLEDB_AW_OLTP">
     <Properties>
       <Property>
@@ -1429,6 +1455,14 @@ COMMIT TRAN
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF_TableToStage\DST_OLEDB_AW_DW">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>

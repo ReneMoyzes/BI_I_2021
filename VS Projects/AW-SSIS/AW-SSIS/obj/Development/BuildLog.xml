@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>AW-SSIS</Name>
-    <LastWriteTime>2021-03-04T11:01:07.0410968Z</LastWriteTime>
+    <LastWriteTime>2021-04-15T09:09:54.0137503Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -12,13 +12,28 @@
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>SRCToDW_SalesOrderDetail_Delta.dtsx</Name>
-      <LastWriteTime>2021-03-04T11:19:21.1412851Z</LastWriteTime>
+      <Name>SRCToDW_SalesOrderDetail_TR.dtsx</Name>
+      <LastWriteTime>2021-03-04T10:33:37.3977535Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>SRCToDW_SalesOrderDetail_TR.dtsx</Name>
-      <LastWriteTime>2021-03-04T10:33:37.3977535Z</LastWriteTime>
+      <Name>SRCToDW_SalesOrderDetail_ChangeTracking.dtsx</Name>
+      <LastWriteTime>2021-04-15T09:09:53.9508082Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>SRCToDW_SalesOrderDetail_DeltaDetect.dtsx</Name>
+      <LastWriteTime>2021-04-15T10:10:59.5191182Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>Script.dtsx</Name>
+      <LastWriteTime>2021-04-15T08:47:30.6637686Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>Package1.dtsx</Name>
+      <LastWriteTime>2021-04-22T10:16:49.3235426Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

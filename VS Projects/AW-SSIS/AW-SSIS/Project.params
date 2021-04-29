@@ -21,4 +21,47 @@
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
   </SSIS:Parameter>
+  <SSIS:Parameter
+    SSIS:Name="DWPassword">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{43ecad0f-5cda-45fd-9581-d3a61365177e}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">1</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value"
+        SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADCTtnyQa2EStXvyM/oQikAAAAAACAAAAAAAQZgAAAAEAACAAAADfMi2POxems2BSWsNFDj3KvYueRPSGTlRePWxTUebklAAAAAAOgAAAAAIAACAAAADIPar2LHnDypN5iYrj1yH+I42RQHHCR5S7ymKhilZ7nYAAAAAPlErBhwE3qx7lSSbfwUM2+7dCvCVddfzSZn/2seTAMQOd1BkgzwVurHEKjoLTN9YFtKU69SJ/mLEb7XUhrd+CyM3zz8Vm83ZaZVah2QDkHv7c7rHL8kaVoRT6vmS4Oq7Nxg7E6uBya9JndpSmSjtq+CBMzex0PZrtByXtLl9DQ0AAAAAD1c4mdUJc7enTlsNFcPHuVl/nQzb5GdB2gAo8wtgWNqjOSaVHBcpiyaEqyup+wG8sT5AOoxL61pNLKyrSc0Vi</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
+  <SSIS:Parameter
+    SSIS:Name="DWUserName">
+    <SSIS:Properties>
+      <SSIS:Property
+        SSIS:Name="ID">{27673db5-0230-4440-bf72-51f4182ffeb7}</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="CreationName"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Description"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Required">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Sensitive">0</SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="Value"></SSIS:Property>
+      <SSIS:Property
+        SSIS:Name="DataType">18</SSIS:Property>
+    </SSIS:Properties>
+  </SSIS:Parameter>
 </SSIS:Parameters>
