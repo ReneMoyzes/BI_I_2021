@@ -1,0 +1,1332 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/17/2022 8:23:25 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="X230"
+  DTS:CreatorName="X230\Rene.Moyzes"
+  DTS:DTSID="{1F1EF665-2958-447A-9500-7DA65B5FBC68}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1029"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{2C6C8D95-C41A-4194-A66E-30A270C31F1A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SQL_WWI]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D2C54C12-BB59-4868-8CA9-6E46A7ED4569}"
+      DTS:ObjectName="SQL_WWI">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.\SQLSRV2017;Initial Catalog=WideWorldImporters;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SQL_WWI_DWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{530B94F4-A943-48DF-8FCA-9D3C427E191C}"
+      DTS:ObjectName="SQL_WWI_DWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost\SQLSRV2017;Initial Catalog=WWI_DWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{82C5468D-79D0-47A0-BFF5-1646FB3A2C05}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LoadID">
+      <DTS:VariableValue
+        DTS:DataType="3">1</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFL_Invoices"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3DD36244-09AE-498B-9758-52DAA3FD31F9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFL_Invoices"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFL_Invoices\DER_SYSCols"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="DER_SYSCols"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFL_Invoices\DER_SYSCols.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFL_Invoices\DER_SYSCols.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Output].Columns[_LoadDate]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Output].Columns[_LoadDate]"
+                      name="_LoadDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[System::StartTime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[System::StartTime]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Output].Columns[_LoadID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Output].Columns[_LoadID]"
+                      name="_LoadID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::LoadID]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::LoadID]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFL_Invoices\DER_SYSCols.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFL_Invoices\DST_Invoices"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST_Invoices"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Stage].[Invoices]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFL_Invoices\DST_Invoices.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SQL_WWI_DWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQL_WWI_DWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[InvoiceID]"
+                      cachedDataType="i4"
+                      cachedName="InvoiceID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[InvoiceID]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[CustomerID]"
+                      cachedDataType="i4"
+                      cachedName="CustomerID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[CustomerID]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[BillToCustomerID]"
+                      cachedDataType="i4"
+                      cachedName="BillToCustomerID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[BillToCustomerID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[BillToCustomerID]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[OrderID]"
+                      cachedDataType="i4"
+                      cachedName="OrderID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[OrderID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[OrderID]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[DeliveryMethodID]"
+                      cachedDataType="i4"
+                      cachedName="DeliveryMethodID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryMethodID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[DeliveryMethodID]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[ContactPersonID]"
+                      cachedDataType="i4"
+                      cachedName="ContactPersonID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[ContactPersonID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ContactPersonID]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[AccountsPersonID]"
+                      cachedDataType="i4"
+                      cachedName="AccountsPersonID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[AccountsPersonID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[AccountsPersonID]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[SalespersonPersonID]"
+                      cachedDataType="i4"
+                      cachedName="SalespersonPersonID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[SalespersonPersonID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[SalespersonPersonID]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[PackedByPersonID]"
+                      cachedDataType="i4"
+                      cachedName="PackedByPersonID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[PackedByPersonID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[PackedByPersonID]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[InvoiceDate]"
+                      cachedDataType="dbDate"
+                      cachedName="InvoiceDate"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceDate]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[InvoiceDate]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[CustomerPurchaseOrderNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CustomerPurchaseOrderNumber"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[CustomerPurchaseOrderNumber]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[CustomerPurchaseOrderNumber]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[IsCreditNote]"
+                      cachedDataType="bool"
+                      cachedName="IsCreditNote"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[IsCreditNote]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[IsCreditNote]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[CreditNoteReason]"
+                      cachedDataType="nText"
+                      cachedName="CreditNoteReason"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[CreditNoteReason]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[CreditNoteReason]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[Comments]"
+                      cachedDataType="nText"
+                      cachedName="Comments"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[Comments]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[DeliveryInstructions]"
+                      cachedDataType="nText"
+                      cachedName="DeliveryInstructions"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryInstructions]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[DeliveryInstructions]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[InternalComments]"
+                      cachedDataType="nText"
+                      cachedName="InternalComments"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[InternalComments]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[InternalComments]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[TotalDryItems]"
+                      cachedDataType="i4"
+                      cachedName="TotalDryItems"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[TotalDryItems]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[TotalDryItems]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[TotalChillerItems]"
+                      cachedDataType="i4"
+                      cachedName="TotalChillerItems"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[TotalChillerItems]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[TotalChillerItems]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[DeliveryRun]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="DeliveryRun"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryRun]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[DeliveryRun]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[RunPosition]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="RunPosition"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[RunPosition]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[RunPosition]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[ReturnedDeliveryData]"
+                      cachedDataType="nText"
+                      cachedName="ReturnedDeliveryData"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[ReturnedDeliveryData]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ReturnedDeliveryData]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[ConfirmedDeliveryTime]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="ConfirmedDeliveryTime"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedDeliveryTime]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ConfirmedDeliveryTime]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[ConfirmedReceivedBy]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="ConfirmedReceivedBy"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedReceivedBy]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ConfirmedReceivedBy]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[LastEditedBy]"
+                      cachedDataType="i4"
+                      cachedName="LastEditedBy"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[LastEditedBy]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[LastEditedBy]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[LastEditedWhen]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="LastEditedWhen"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[LastEditedWhen]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[LastEditedWhen]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[_LoadDate]"
+                      cachedDataType="date"
+                      cachedName="_LoadDate"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[_LoadDate]"
+                      lineageId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Output].Columns[_LoadDate]" />
+                    <inputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].Columns[_LoadID]"
+                      cachedDataType="i4"
+                      cachedName="_LoadID"
+                      externalMetadataColumnId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[_LoadID]"
+                      lineageId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Output].Columns[_LoadID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceID]"
+                      dataType="i4"
+                      name="InvoiceID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[CustomerID]"
+                      dataType="i4"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[BillToCustomerID]"
+                      dataType="i4"
+                      name="BillToCustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[OrderID]"
+                      dataType="i4"
+                      name="OrderID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryMethodID]"
+                      dataType="i4"
+                      name="DeliveryMethodID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[ContactPersonID]"
+                      dataType="i4"
+                      name="ContactPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[AccountsPersonID]"
+                      dataType="i4"
+                      name="AccountsPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[SalespersonPersonID]"
+                      dataType="i4"
+                      name="SalespersonPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[PackedByPersonID]"
+                      dataType="i4"
+                      name="PackedByPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceDate]"
+                      dataType="dbDate"
+                      name="InvoiceDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[CustomerPurchaseOrderNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="CustomerPurchaseOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[IsCreditNote]"
+                      dataType="bool"
+                      name="IsCreditNote" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[CreditNoteReason]"
+                      dataType="nText"
+                      name="CreditNoteReason" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
+                      dataType="nText"
+                      name="Comments" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryInstructions]"
+                      dataType="nText"
+                      name="DeliveryInstructions" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[InternalComments]"
+                      dataType="nText"
+                      name="InternalComments" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[TotalDryItems]"
+                      dataType="i4"
+                      name="TotalDryItems" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[TotalChillerItems]"
+                      dataType="i4"
+                      name="TotalChillerItems" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryRun]"
+                      dataType="wstr"
+                      length="5"
+                      name="DeliveryRun" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[RunPosition]"
+                      dataType="wstr"
+                      length="5"
+                      name="RunPosition" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[ReturnedDeliveryData]"
+                      dataType="nText"
+                      name="ReturnedDeliveryData" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedDeliveryTime]"
+                      dataType="dbTimeStamp2"
+                      name="ConfirmedDeliveryTime"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedReceivedBy]"
+                      dataType="wstr"
+                      length="4000"
+                      name="ConfirmedReceivedBy" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[LastEditedBy]"
+                      dataType="i4"
+                      name="LastEditedBy" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[LastEditedWhen]"
+                      dataType="dbTimeStamp2"
+                      name="LastEditedWhen"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[_LoadDate]"
+                      dataType="dbTimeStamp2"
+                      name="_LoadDate"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input].ExternalColumns[_LoadID]"
+                      dataType="i4"
+                      name="_LoadID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFL_Invoices\DST_Invoices.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\DST_Invoices.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\DST_Invoices.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\DST_Invoices.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFL_Invoices\SRC_Invoices"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC_Invoices"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Sales].[Invoices]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1250</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFL_Invoices\SRC_Invoices.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SQL_WWI]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQL_WWI]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[InvoiceID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[InvoiceID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[InvoiceID]"
+                      name="InvoiceID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                      name="CustomerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[BillToCustomerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[BillToCustomerID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[BillToCustomerID]"
+                      name="BillToCustomerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[OrderID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[OrderID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[OrderID]"
+                      name="OrderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[DeliveryMethodID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[DeliveryMethodID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[DeliveryMethodID]"
+                      name="DeliveryMethodID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ContactPersonID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[ContactPersonID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ContactPersonID]"
+                      name="ContactPersonID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[AccountsPersonID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[AccountsPersonID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[AccountsPersonID]"
+                      name="AccountsPersonID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[SalespersonPersonID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[SalespersonPersonID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[SalespersonPersonID]"
+                      name="SalespersonPersonID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[PackedByPersonID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[PackedByPersonID]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[PackedByPersonID]"
+                      name="PackedByPersonID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                      name="InvoiceDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[CustomerPurchaseOrderNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[CustomerPurchaseOrderNumber]"
+                      length="20"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[CustomerPurchaseOrderNumber]"
+                      name="CustomerPurchaseOrderNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[IsCreditNote]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[IsCreditNote]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[IsCreditNote]"
+                      name="IsCreditNote"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[CreditNoteReason]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[CreditNoteReason]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[CreditNoteReason]"
+                      name="CreditNoteReason"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[Comments]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[Comments]"
+                      name="Comments"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[DeliveryInstructions]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[DeliveryInstructions]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[DeliveryInstructions]"
+                      name="DeliveryInstructions"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[InternalComments]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[InternalComments]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[InternalComments]"
+                      name="InternalComments"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[TotalDryItems]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[TotalDryItems]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[TotalDryItems]"
+                      name="TotalDryItems"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[TotalChillerItems]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[TotalChillerItems]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[TotalChillerItems]"
+                      name="TotalChillerItems"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[DeliveryRun]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[DeliveryRun]"
+                      length="5"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[DeliveryRun]"
+                      name="DeliveryRun"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[RunPosition]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[RunPosition]"
+                      length="5"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[RunPosition]"
+                      name="RunPosition"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ReturnedDeliveryData]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[ReturnedDeliveryData]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ReturnedDeliveryData]"
+                      name="ReturnedDeliveryData"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ConfirmedDeliveryTime]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDeliveryTime]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ConfirmedDeliveryTime]"
+                      name="ConfirmedDeliveryTime"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ConfirmedReceivedBy]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedReceivedBy]"
+                      length="4000"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[ConfirmedReceivedBy]"
+                      name="ConfirmedReceivedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[LastEditedBy]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[LastEditedBy]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[LastEditedBy]"
+                      name="LastEditedBy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[LastEditedWhen]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[LastEditedWhen]"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].Columns[LastEditedWhen]"
+                      name="LastEditedWhen"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[InvoiceID]"
+                      dataType="i4"
+                      name="InvoiceID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                      dataType="i4"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[BillToCustomerID]"
+                      dataType="i4"
+                      name="BillToCustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[OrderID]"
+                      dataType="i4"
+                      name="OrderID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[DeliveryMethodID]"
+                      dataType="i4"
+                      name="DeliveryMethodID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[ContactPersonID]"
+                      dataType="i4"
+                      name="ContactPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[AccountsPersonID]"
+                      dataType="i4"
+                      name="AccountsPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[SalespersonPersonID]"
+                      dataType="i4"
+                      name="SalespersonPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[PackedByPersonID]"
+                      dataType="i4"
+                      name="PackedByPersonID" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                      dataType="dbDate"
+                      name="InvoiceDate" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[CustomerPurchaseOrderNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="CustomerPurchaseOrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[IsCreditNote]"
+                      dataType="bool"
+                      name="IsCreditNote" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[CreditNoteReason]"
+                      dataType="nText"
+                      name="CreditNoteReason" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[Comments]"
+                      dataType="nText"
+                      name="Comments" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[DeliveryInstructions]"
+                      dataType="nText"
+                      name="DeliveryInstructions" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[InternalComments]"
+                      dataType="nText"
+                      name="InternalComments" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[TotalDryItems]"
+                      dataType="i4"
+                      name="TotalDryItems" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[TotalChillerItems]"
+                      dataType="i4"
+                      name="TotalChillerItems" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[DeliveryRun]"
+                      dataType="wstr"
+                      length="5"
+                      name="DeliveryRun" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[RunPosition]"
+                      dataType="wstr"
+                      length="5"
+                      name="RunPosition" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[ReturnedDeliveryData]"
+                      dataType="nText"
+                      name="ReturnedDeliveryData" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedDeliveryTime]"
+                      dataType="dbTimeStamp2"
+                      name="ConfirmedDeliveryTime"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[ConfirmedReceivedBy]"
+                      dataType="wstr"
+                      length="4000"
+                      name="ConfirmedReceivedBy" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[LastEditedBy]"
+                      dataType="i4"
+                      name="LastEditedBy" />
+                    <externalMetadataColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output].ExternalColumns[LastEditedWhen]"
+                      dataType="dbTimeStamp2"
+                      name="LastEditedWhen"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[InvoiceID]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[InvoiceID]"
+                      name="InvoiceID" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                      name="CustomerID" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[BillToCustomerID]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[BillToCustomerID]"
+                      name="BillToCustomerID" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[OrderID]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[OrderID]"
+                      name="OrderID" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[DeliveryMethodID]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[DeliveryMethodID]"
+                      name="DeliveryMethodID" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ContactPersonID]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ContactPersonID]"
+                      name="ContactPersonID" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[AccountsPersonID]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[AccountsPersonID]"
+                      name="AccountsPersonID" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[SalespersonPersonID]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[SalespersonPersonID]"
+                      name="SalespersonPersonID" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[PackedByPersonID]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[PackedByPersonID]"
+                      name="PackedByPersonID" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                      dataType="dbDate"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                      name="InvoiceDate" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[CustomerPurchaseOrderNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[CustomerPurchaseOrderNumber]"
+                      name="CustomerPurchaseOrderNumber" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[IsCreditNote]"
+                      dataType="bool"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[IsCreditNote]"
+                      name="IsCreditNote" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[CreditNoteReason]"
+                      dataType="nText"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[CreditNoteReason]"
+                      name="CreditNoteReason" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      dataType="nText"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[Comments]"
+                      name="Comments" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[DeliveryInstructions]"
+                      dataType="nText"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[DeliveryInstructions]"
+                      name="DeliveryInstructions" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[InternalComments]"
+                      dataType="nText"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[InternalComments]"
+                      name="InternalComments" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[TotalDryItems]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[TotalDryItems]"
+                      name="TotalDryItems" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[TotalChillerItems]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[TotalChillerItems]"
+                      name="TotalChillerItems" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[DeliveryRun]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[DeliveryRun]"
+                      name="DeliveryRun" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[RunPosition]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[RunPosition]"
+                      name="RunPosition" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ReturnedDeliveryData]"
+                      dataType="nText"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ReturnedDeliveryData]"
+                      name="ReturnedDeliveryData" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ConfirmedDeliveryTime]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ConfirmedDeliveryTime]"
+                      name="ConfirmedDeliveryTime"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ConfirmedReceivedBy]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ConfirmedReceivedBy]"
+                      name="ConfirmedReceivedBy" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[LastEditedBy]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[LastEditedBy]"
+                      name="LastEditedBy" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[LastEditedWhen]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[LastEditedWhen]"
+                      name="LastEditedWhen"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFL_Invoices.Paths[Derived Column Output]"
+              endId="Package\DFL_Invoices\DST_Invoices.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFL_Invoices.Paths[OLE DB Source Output]"
+              endId="Package\DFL_Invoices\DER_SYSCols.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_SwitchStageToDW"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FB397546-2CB2-429C-BCEF-6CF35AB4697A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_SwitchStageToDW"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{530B94F4-A943-48DF-8FCA-9D3C427E191C}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE DW.Invoices&#xA;ALTER TABLE [Stage].[Invoices] SWITCH TO [DW].[Invoices]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_TruncateTable"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EB908FE9-D146-49AF-AA29-B4CA9780429E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_TruncateTable"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{530B94F4-A943-48DF-8FCA-9D3C427E191C}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Stage.Invoices" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{60EE0630-E857-4F20-B0D4-7F3DA4E24D60}"
+      DTS:From="Package\SQL_TruncateTable"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFL_Invoices" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{57FE55A1-685D-4295-A98B-A36A3F1612BE}"
+      DTS:From="Package\DFL_Invoices"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\SQL_SwitchStageToDW" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="142,42"
+          Id="Package\DFL_Invoices"
+          TopLeft="212,119" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\SQL_TruncateTable"
+          TopLeft="196,37" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="282.25,79">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="190,42"
+          Id="Package\SQL_SwitchStageToDW"
+          TopLeft="190,210" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="284,161">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFL_Invoices">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="143,42"
+          Id="Package\DFL_Invoices\SRC_Invoices"
+          TopLeft="241,29" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\DFL_Invoices\DER_SYSCols"
+          TopLeft="237,109" />
+        <EdgeLayout
+          Id="Package\DFL_Invoices.Paths[OLE DB Source Output]"
+          TopLeft="310.25,71">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="143,42"
+          Id="Package\DFL_Invoices\DST_Invoices"
+          TopLeft="235,188" />
+        <EdgeLayout
+          Id="Package\DFL_Invoices.Paths[Derived Column Output]"
+          TopLeft="307.25,151">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFL_Invoices\SRC_Invoices">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFL_Invoices\DST_Invoices">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,280 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/6/2021 11:02:58 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="X230"
+  DTS:CreatorName="X230\Rene.Moyzes"
+  DTS:DTSID="{81683282-5050-4962-A2CD-9A02A0DA8E93}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1029"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{22CB4957-5CE4-48E0-92E7-CE283466D238}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Power Query Connection Manager]"
+      DTS:CreationName="PowerQuery"
+      DTS:DTSID="{F4B82B7C-AF54-412E-8472-D072B97D3F9B}"
+      DTS:ObjectName="Power Query Connection Manager">
+      <DTS:ObjectData>
+        <ConnectionManager
+          ConnectionString="[{&quot;kind&quot;:&quot;File&quot;,&quot;path&quot;:&quot;c:\\users\\rene.moyzes\\downloads\\full_data.csv&quot;,&quot;AuthenticationKind&quot;:&quot;Windows&quot;}]" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B9EB05A5-1B84-4FBF-80E7-ECE07CAECDAA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rc">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{534F85AC-26F7-4D96-A8AF-F69FF861ABFF}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Power Query Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              description="Power Query Source"
+              name="Power Query Source">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode of the query."
+                  name="QueryMode"
+                  typeConverter="Microsoft.SqlServer.IntegrationServices.PowerQuery.TypeConverters.QueryModeTypeConverter, Microsoft.SqlServer.IntegrationServices.PowerQuery, Version=14.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">0</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the M query to be executed."
+                  name="SingleQueryVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The single M query to be executed."
+                  name="SingleQueryText"
+                  state="cdata"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"><![CDATA[let
+    Source = Csv.Document(File.Contents("C:\Users\Rene.Moyzes\Downloads\full_data.csv"),[Delimiter=",", Columns=6, Encoding=1250, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date", type date}, {"location", type text}, {"new_cases", Int64.Type}, {"new_deaths", Int64.Type}, {"total_cases", Int64.Type}, {"total_deaths", Int64.Type}}),
+    #"Removed Blank Rows" = Table.SelectRows(#"Changed Type", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+    #"Filtered Rows" = Table.SelectRows(#"Removed Blank Rows", each [new_cases] <> null and [new_cases] <> ""),
+    #"Renamed Columns" = Table.RenameColumns(#"Filtered Rows",{{"total_cases", "total"}}),
+    #"Filtered Rows1" = Table.SelectRows(#"Renamed Columns", each Date.IsInPreviousYear([date]))
+in
+    #"Filtered Rows1"]]></property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.PowerQuerySource</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Power Query Source.Connections[File Connection]"
+                  connectionManagerID="Package.ConnectionManagers[Power Query Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Power Query Connection Manager]"
+                  description="File/c:\users\rene.moyzes\downloads\full_data.csv"
+                  name="File Connection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Power Query Source.Outputs[Output]"
+                  name="Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[date]"
+                      dataType="dbDate"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[date]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[date]"
+                      name="date" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[location]"
+                      dataType="nText"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[location]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[location]"
+                      name="location" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[new_cases]"
+                      dataType="i8"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[new_cases]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[new_cases]"
+                      name="new_cases" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[new_deaths]"
+                      dataType="i8"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[new_deaths]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[new_deaths]"
+                      name="new_deaths" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[total]"
+                      dataType="i8"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[total]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[total]"
+                      name="total" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[total_deaths]"
+                      dataType="i8"
+                      externalMetadataColumnId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[total_deaths]"
+                      lineageId="Package\Data Flow Task\Power Query Source.Outputs[Output].Columns[total_deaths]"
+                      name="total_deaths" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[date]"
+                      dataType="dbDate"
+                      name="date" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[location]"
+                      dataType="nText"
+                      name="location" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[new_cases]"
+                      dataType="i8"
+                      name="new_cases" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[new_deaths]"
+                      dataType="i8"
+                      name="new_deaths" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[total]"
+                      dataType="i8"
+                      name="total" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Power Query Source.Outputs[Output].ExternalColumns[total_deaths]"
+                      dataType="i8"
+                      name="total_deaths" />
+                  </externalMetadataColumns>
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::rc</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Output]"
+              endId="Package\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+              name="Output"
+              startId="Package\Data Flow Task\Power Query Source.Outputs[Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="5.5,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Data Flow Task\Power Query Source"
+          TopLeft="313,72" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Data Flow Task\Row Count"
+          TopLeft="439,224" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Output]"
+          TopLeft="400.5,114">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="103.5,110"
+              Start="0,0"
+              End="103.5,102.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,51"
+                    Point2="0,55"
+                    Point3="4,55" />
+                  <mssgle:LineSegment
+                    End="99.5,55" />
+                  <mssgle:CubicBezierSegment
+                    Point1="99.5,55"
+                    Point2="103.5,55"
+                    Point3="103.5,59" />
+                  <mssgle:LineSegment
+                    End="103.5,102.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
