@@ -26,14 +26,15 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">X230</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwec1Kyvw3UmIR4WfGfDEIgAAAAACAAAAAAAQZgAAAAEAACAAAAA7FXjzBdMml3maxJV80gbiUEK3uv4dYA3BO5bda9XqXQAAAAAOgAAAAAIAACAAAAA9OgayxyZ7CgGg3EUewZbtAU1Klun8PiIHh25DxtMbspAAAADNzXkghl8CNqpLvewF17RqEnE0wDW+4QOmNMajGlGFbGnFsYVpz0c7hdlSmvEEGno4e6bCWs4ofCsyKREb3mkF83E2rrqNRmgIbYXtRBkNneT29ktAkQuqcUUpo4kbGurFeFrgXKJiNTQyTe+eqIFH4Hi5GENwIpr6M0ZlHJBaW0/tgknhdjAt/YeV+GBnuMtAAAAA+1LCqSnPlYt553EG5tSm0iwaQhbJQ/zT2EqzQrv/zYGDRA/04eODNbGBQaVA8OxiJ0UDjI8oU/MO49KAjBmLGw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwec1Kyvw3UmIR4WfGfDEIgAAAAACAAAAAAAQZgAAAAEAACAAAAD8wNp3FDkzt9KOc0ft1zHQ0z9lpUSiukGjnAWA94xK3AAAAAAOgAAAAAIAACAAAAC/Z7IybztHw2YsYYasSEkSCrAK6hG+I1zi0zvFEP5scJAAAACIgcokKx/CIQ+U+YXAVBEBXJpBQNEAmfsE5MoxBN++Vf7ecBDuQCTn7qmtiiwQpc4XRX7plmKGo2KmeOjNVHINxRHD5R/f1a13kVuc8Dndfhm6hAXmxgCNgfPwlDszwL9gQkE4JjQFTTtXRwYB28lb3pregJHNJ/5vgmL+QbsVE9CHaDf4YsydxerPdaUqyENAAAAA0Wsdht05U16GfVwoeWcavajm+oxMrp/OWY4IE7YfbtfpaNemYp7e3Wp/Orlec/ZqPGcSnmXgqPdKK0i3z2CyJQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
           <SSIS:Package SSIS:Name="STG_DW_Invoices_TR.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="STG_DW_Invoices_Merge.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="Package1.dtsx" SSIS:EntryPoint="1" />
-          <SSIS:Package SSIS:Name="STG_DW_Invoices_DD.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="ODS_Invoices.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="ODS_Customers.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
           <SSIS:ConnectionManager SSIS:Name="SQL_ETLFramework.conmgr" />
@@ -536,16 +537,16 @@
               </SSIS:Properties>
               <SSIS:Parameters />
             </SSIS:PackageMetaData>
-            <SSIS:PackageMetaData SSIS:Name="STG_DW_Invoices_DD.dtsx">
+            <SSIS:PackageMetaData SSIS:Name="ODS_Invoices.dtsx">
               <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{0795FBEC-8D69-4CFF-8F45-5DACA5653029}</SSIS:Property>
-                <SSIS:Property SSIS:Name="Name">STG_DW_Invoices_DD</SSIS:Property>
+                <SSIS:Property SSIS:Name="ID">{889BA9A0-CC45-421B-9A47-F3C58ACCEBF5}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">ODS_Invoices</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">40</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">45</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{3D5D0EEE-E663-41D3-B36C-8CD8A1DA625A}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{8BE56719-400E-4609-A4A6-2D2097063DD2}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -625,6 +626,108 @@
                 <SSIS:Parameter SSIS:Name="TruncateDelta">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">{CF206BBC-5F83-4A89-9A96-B27E71F2908B}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
+              </SSIS:Parameters>
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="ODS_Customers.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{BC0E04D4-6FF5-46C6-A093-E11FDCC68F5D}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">ODS_Customers</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">48</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{E549F044-B421-476C-A884-54CB5AFD51A1}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters>
+                <SSIS:Parameter SSIS:Name="DestinationSystem">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">{9D1CBF9B-B14C-4AC8-8A20-283655720BB9}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">ODS</SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
+                <SSIS:Parameter SSIS:Name="DestinationTable">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">{4EFE914B-6B9C-4D43-A7BD-77EE07BD2C89}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">ODS.Customers</SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
+                <SSIS:Parameter SSIS:Name="Reload">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">{A3895811-9071-478A-8AF2-FDD8467BCAAF}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
+                <SSIS:Parameter SSIS:Name="SourceSystem">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">{B9FC6400-D325-4F04-85B1-8C2906A228FB}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Transactional DB</SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
+                <SSIS:Parameter SSIS:Name="SourceTable">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">{85A69486-D28D-4907-8B08-0B149A093E20}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Sales.Customers</SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
+                <SSIS:Parameter SSIS:Name="TruncateDelta">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">{AAC77AED-6861-4B41-B951-9C274F0B15F7}</SSIS:Property>
                     <SSIS:Property SSIS:Name="CreationName">
                     </SSIS:Property>
                     <SSIS:Property SSIS:Name="Description">
