@@ -11,8 +11,8 @@
   DTS:LocaleID="1029"
   DTS:ObjectName="ODS_Customers"
   DTS:PackageType="5"
-  DTS:VersionBuild="48"
-  DTS:VersionGUID="{E549F044-B421-476C-A884-54CB5AFD51A1}">
+  DTS:VersionBuild="49"
+  DTS:VersionGUID="{56CCEE1E-9884-4E5B-BD7F-A71216F52903}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -192,19 +192,19 @@ ORDER BY 1</DTS:VariableValue>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Derived Column Output]"
+                      refId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Deleted]"
                       description="Default Output of the Derived Column Transformation"
                       exclusionGroup="1"
-                      name="Derived Column Output"
+                      name="Deleted"
                       synchronousInputId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Derived Column Output].Columns[_OPERATION]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Deleted].Columns[_OPERATION]"
                           dataType="wstr"
                           errorOrTruncationOperation="Computation"
                           errorRowDisposition="FailComponent"
                           length="1"
-                          lineageId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Derived Column Output].Columns[_OPERATION]"
+                          lineageId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Deleted].Columns[_OPERATION]"
                           name="_OPERATION"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -4252,12 +4252,26 @@ ORDER BY 1</property>
                       <externalMetadataColumns />
                     </input>
                     <input
-                      refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3]"
+                      refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4]"
                       hasSideEffects="true"
-                      name="Union All Input 3">
+                      name="Union All Input 4">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[BillToCustomerID]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[CustomerID]"
+                          cachedDataType="i4"
+                          cachedName="CustomerID"
+                          cachedSortKeyPosition="1"
+                          lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[CustomerID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Outputs[Union All Output 1].Columns[CustomerID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[BillToCustomerID]"
                           cachedDataType="i4"
                           cachedName="BillToCustomerID"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[BillToCustomerID]">
@@ -4270,7 +4284,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[DeliveryMethodID]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[DeliveryMethodID]"
                           cachedDataType="i4"
                           cachedName="DeliveryMethodID"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[DeliveryMethodID]">
@@ -4283,7 +4297,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[DeliveryRun]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[DeliveryRun]"
                           cachedDataType="wstr"
                           cachedLength="5"
                           cachedName="DeliveryRun"
@@ -4297,7 +4311,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[RunPosition]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[RunPosition]"
                           cachedDataType="wstr"
                           cachedLength="5"
                           cachedName="RunPosition"
@@ -4311,7 +4325,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[LastEditedBy]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[LastEditedBy]"
                           cachedDataType="i4"
                           cachedName="LastEditedBy"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[LastEditedBy]">
@@ -4324,7 +4338,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[_HASH]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[_HASH]"
                           cachedDataType="wstr"
                           cachedLength="32"
                           cachedName="_HASH"
@@ -4338,7 +4352,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[_LoadDate]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[_LoadDate]"
                           cachedDataType="date"
                           cachedName="_LoadDate"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[_LoadDate]">
@@ -4351,7 +4365,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[_LoadID]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[_LoadID]"
                           cachedDataType="i4"
                           cachedName="_LoadID"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[_LoadID]">
@@ -4364,7 +4378,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[SRC_KEY]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[SRC_KEY]"
                           cachedDataType="i4"
                           cachedName="SRC_KEY"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[SRC_KEY]">
@@ -4377,7 +4391,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[_DESTHASH]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[_DESTHASH]"
                           cachedDataType="wstr"
                           cachedLength="32"
                           cachedName="_DESTHASH"
@@ -4391,7 +4405,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[CustomerName]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[CustomerName]"
                           cachedDataType="wstr"
                           cachedLength="100"
                           cachedName="CustomerName"
@@ -4405,7 +4419,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[CustomerCategoryID]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[CustomerCategoryID]"
                           cachedDataType="i4"
                           cachedName="CustomerCategoryID"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[CustomerCategoryID]">
@@ -4418,7 +4432,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[BuyingGroupID]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[BuyingGroupID]"
                           cachedDataType="i4"
                           cachedName="BuyingGroupID"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[BuyingGroupID]">
@@ -4431,7 +4445,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[PrimaryContactPersonID]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[PrimaryContactPersonID]"
                           cachedDataType="i4"
                           cachedName="PrimaryContactPersonID"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[PrimaryContactPersonID]">
@@ -4444,7 +4458,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[AlternateContactPersonID]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[AlternateContactPersonID]"
                           cachedDataType="i4"
                           cachedName="AlternateContactPersonID"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[AlternateContactPersonID]">
@@ -4457,7 +4471,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[DeliveryCityID]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[DeliveryCityID]"
                           cachedDataType="i4"
                           cachedName="DeliveryCityID"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[DeliveryCityID]">
@@ -4470,7 +4484,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[PostalCityID]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[PostalCityID]"
                           cachedDataType="i4"
                           cachedName="PostalCityID"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[PostalCityID]">
@@ -4483,7 +4497,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[CreditLimit]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[CreditLimit]"
                           cachedDataType="numeric"
                           cachedName="CreditLimit"
                           cachedPrecision="18"
@@ -4498,7 +4512,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[AccountOpenedDate]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[AccountOpenedDate]"
                           cachedDataType="dbDate"
                           cachedName="AccountOpenedDate"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[AccountOpenedDate]">
@@ -4511,7 +4525,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[StandardDiscountPercentage]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[StandardDiscountPercentage]"
                           cachedDataType="numeric"
                           cachedName="StandardDiscountPercentage"
                           cachedPrecision="18"
@@ -4526,7 +4540,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[IsStatementSent]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[IsStatementSent]"
                           cachedDataType="bool"
                           cachedName="IsStatementSent"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[IsStatementSent]">
@@ -4539,7 +4553,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[IsOnCreditHold]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[IsOnCreditHold]"
                           cachedDataType="bool"
                           cachedName="IsOnCreditHold"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[IsOnCreditHold]">
@@ -4552,7 +4566,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[PaymentDays]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[PaymentDays]"
                           cachedDataType="i4"
                           cachedName="PaymentDays"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[PaymentDays]">
@@ -4565,7 +4579,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[PhoneNumber]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[PhoneNumber]"
                           cachedDataType="wstr"
                           cachedLength="20"
                           cachedName="PhoneNumber"
@@ -4579,7 +4593,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[FaxNumber]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[FaxNumber]"
                           cachedDataType="wstr"
                           cachedLength="20"
                           cachedName="FaxNumber"
@@ -4593,7 +4607,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[WebsiteURL]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[WebsiteURL]"
                           cachedDataType="wstr"
                           cachedLength="256"
                           cachedName="WebsiteURL"
@@ -4607,7 +4621,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[DeliveryAddressLine1]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[DeliveryAddressLine1]"
                           cachedDataType="wstr"
                           cachedLength="60"
                           cachedName="DeliveryAddressLine1"
@@ -4621,7 +4635,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[DeliveryAddressLine2]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[DeliveryAddressLine2]"
                           cachedDataType="wstr"
                           cachedLength="60"
                           cachedName="DeliveryAddressLine2"
@@ -4635,7 +4649,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[DeliveryPostalCode]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[DeliveryPostalCode]"
                           cachedDataType="wstr"
                           cachedLength="10"
                           cachedName="DeliveryPostalCode"
@@ -4649,7 +4663,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[DeliveryLocation]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[DeliveryLocation]"
                           cachedDataType="image"
                           cachedName="DeliveryLocation"
                           lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[DeliveryLocation]">
@@ -4662,7 +4676,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[PostalAddressLine1]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[PostalAddressLine1]"
                           cachedDataType="wstr"
                           cachedLength="60"
                           cachedName="PostalAddressLine1"
@@ -4676,7 +4690,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[PostalAddressLine2]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[PostalAddressLine2]"
                           cachedDataType="wstr"
                           cachedLength="60"
                           cachedName="PostalAddressLine2"
@@ -4690,7 +4704,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[PostalPostalCode]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[PostalPostalCode]"
                           cachedDataType="wstr"
                           cachedLength="10"
                           cachedName="PostalPostalCode"
@@ -4704,7 +4718,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[ValidFrom]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[ValidFrom]"
                           cachedDataType="dbTimeStamp2"
                           cachedName="ValidFrom"
                           cachedScale="7"
@@ -4718,7 +4732,7 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[ValidTo]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[ValidTo]"
                           cachedDataType="dbTimeStamp2"
                           cachedName="ValidTo"
                           cachedScale="7"
@@ -4732,11 +4746,11 @@ ORDER BY 1</property>
                           </properties>
                         </inputColumn>
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[_OPERATION]"
+                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4].Columns[_OPERATION]"
                           cachedDataType="wstr"
                           cachedLength="1"
                           cachedName="_OPERATION"
-                          lineageId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Derived Column Output].Columns[_OPERATION]">
+                          lineageId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Deleted].Columns[_OPERATION]">
                           <properties>
                             <property
                               containsID="true"
@@ -4745,27 +4759,14 @@ ORDER BY 1</property>
                               name="OutputColumnLineageID">#{Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Outputs[Union All Output 1].Columns[_OPERATION]}</property>
                           </properties>
                         </inputColumn>
-                        <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3].Columns[DESTID]"
-                          cachedDataType="i4"
-                          cachedName="DESTID"
-                          lineageId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Outputs[Merge Join Output].Columns[DESTID]">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Output column lineage ID"
-                              name="OutputColumnLineageID">#{Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Outputs[Union All Output 1].Columns[CustomerID]}</property>
-                          </properties>
-                        </inputColumn>
                       </inputColumns>
                       <externalMetadataColumns />
                     </input>
                     <input
-                      refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4]"
+                      refId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3]"
                       dangling="true"
                       hasSideEffects="true"
-                      name="Union All Input 4">
+                      name="Union All Input 3">
                       <externalMetadataColumns />
                     </input>
                   </inputs>
@@ -4994,25 +4995,25 @@ ORDER BY 1</property>
                   name="DELETE"
                   startId="Package\SQC_DataProcessing\DFL_Customers\SPL_IUDN.Outputs[DELETE]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Derived Column Output]"
-                  endId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Inputs[Merge Join Left Input]"
-                  name="Derived Column Output"
-                  startId="Package\SQC_DataProcessing\DFL_Customers\DER_SYSCols.Outputs[Derived Column Output]" />
+                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Deleted]"
+                  endId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 4]"
+                  name="Deleted"
+                  startId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Deleted]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Derived Column Output3]"
-                  endId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 3]"
+                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Derived Column Output1]"
+                  endId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 1]"
                   name="Derived Column Output"
-                  startId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Outputs[Derived Column Output]" />
+                  startId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationI.Outputs[Derived Column Output]" />
                 <path
                   refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Derived Column Output2]"
                   endId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 2]"
                   name="Derived Column Output"
                   startId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationU.Outputs[Derived Column Output]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Derived Column Output1]"
-                  endId="Package\SQC_DataProcessing\DFL_Customers\UI_IUD.Inputs[Union All Input 1]"
+                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Derived Column Output]"
+                  endId="Package\SQC_DataProcessing\DFL_Customers\MRJ_SRC_DEST.Inputs[Merge Join Left Input]"
                   name="Derived Column Output"
-                  startId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationI.Outputs[Derived Column Output]" />
+                  startId="Package\SQC_DataProcessing\DFL_Customers\DER_SYSCols.Outputs[Derived Column Output]" />
                 <path
                   refId="Package\SQC_DataProcessing\DFL_Customers.Paths[HashColumnsOutput]"
                   endId="Package\SQC_DataProcessing\DFL_Customers\RC_Source.Inputs[Row Count Input 1]"
@@ -5044,6 +5045,21 @@ ORDER BY 1</property>
                   name="OLE DB Source Output"
                   startId="Package\SQC_DataProcessing\DFL_Customers\SRC_Customers.Outputs[OLE DB Source Output]" />
                 <path
+                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Row Count Output 11]"
+                  endId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationI.Inputs[Derived Column Input]"
+                  name="Row Count Output 1"
+                  startId="Package\SQC_DataProcessing\DFL_Customers\RC_INSERT.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Row Count Output 12]"
+                  endId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationU.Inputs[Derived Column Input]"
+                  name="Row Count Output 1"
+                  startId="Package\SQC_DataProcessing\DFL_Customers\RC_UPDATE.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Row Count Output 13]"
+                  endId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Inputs[Derived Column Input]"
+                  name="Row Count Output 1"
+                  startId="Package\SQC_DataProcessing\DFL_Customers\RC_DELETE.Outputs[Row Count Output 1]" />
+                <path
                   refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Row Count Output 14]"
                   endId="Package\SQC_DataProcessing\DFL_Customers\DER_SYSCols.Inputs[Derived Column Input]"
                   name="Row Count Output 1"
@@ -5053,21 +5069,6 @@ ORDER BY 1</property>
                   endId="Package\SQC_DataProcessing\DFL_Customers\SPL_IUDN.Inputs[Conditional Split Input]"
                   name="Row Count Output 1"
                   startId="Package\SQC_DataProcessing\DFL_Customers\RC_JoinedRows.Outputs[Row Count Output 1]" />
-                <path
-                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Row Count Output 12]"
-                  endId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationU.Inputs[Derived Column Input]"
-                  name="Row Count Output 1"
-                  startId="Package\SQC_DataProcessing\DFL_Customers\RC_UPDATE.Outputs[Row Count Output 1]" />
-                <path
-                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Row Count Output 11]"
-                  endId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationI.Inputs[Derived Column Input]"
-                  name="Row Count Output 1"
-                  startId="Package\SQC_DataProcessing\DFL_Customers\RC_INSERT.Outputs[Row Count Output 1]" />
-                <path
-                  refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Row Count Output 13]"
-                  endId="Package\SQC_DataProcessing\DFL_Customers\DC_OperationD.Inputs[Derived Column Input]"
-                  name="Row Count Output 1"
-                  startId="Package\SQC_DataProcessing\DFL_Customers\RC_DELETE.Outputs[Row Count Output 1]" />
                 <path
                   refId="Package\SQC_DataProcessing\DFL_Customers.Paths[Union All Output 1]"
                   endId="Package\SQC_DataProcessing\DFL_Customers\DST_Delta.Inputs[OLE DB Destination Input]"
@@ -6028,8 +6029,34 @@ ORDER BY 1</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="129,42"
+          Id="Package\SQC_DataProcessing\DFL_Customers\DST_Delta"
+          TopLeft="277,1019" />
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Customers.Paths[Derived Column Output3]"
+          Id="Package\SQC_DataProcessing\DFL_Customers.Paths[Union All Output 1]"
+          TopLeft="337.75,979">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SQC_DataProcessing\DFL_Customers.Paths[Deleted]"
           TopLeft="563,869">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -6054,32 +6081,6 @@ ORDER BY 1</property>
                     Point3="-202.5,48.2971428571429" />
                   <mssgle:LineSegment
                     End="-202.5,60.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="129,42"
-          Id="Package\SQC_DataProcessing\DFL_Customers\DST_Delta"
-          TopLeft="277,1019" />
-        <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Customers.Paths[Union All Output 1]"
-          TopLeft="337.75,979">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,40"
-              Start="0,0"
-              End="0,32.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
