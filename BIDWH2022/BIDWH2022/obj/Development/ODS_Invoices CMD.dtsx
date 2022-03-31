@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="2/17/2022 8:23:25 AM"
@@ -4003,12 +4003,12 @@ ORDER BY 1</property>
                   name="OLE DB Command Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\OLE DB Command.Outputs[OLE DB Command Output]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output1]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\HCT_HashColumns.Inputs[HashColumnsInput]"
                   name="OLE DB Source Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output1]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\MRJ_SRC_DEST.Inputs[Merge Join Right Input]"
                   name="OLE DB Source Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\SRC_ODS_Invoices.Outputs[OLE DB Source Output]" />
@@ -4122,7 +4122,7 @@ ORDER BY 1</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQLLogExecutionStats"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4199,7 +4199,7 @@ ORDER BY 1</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQLSetStatusFailure"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4222,7 +4222,7 @@ ORDER BY 1</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQLSetStatusFinished"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4692,7 +4692,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output1]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
           TopLeft="146.75,122">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -4714,7 +4714,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output1]"
           TopLeft="513.5,120">
           <EdgeLayout.Curve>
             <mssgle:Curve

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="2/17/2022 8:23:25 AM"
@@ -4245,22 +4245,22 @@ ORDER BY 1</property>
                   name="Derived Column Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\DER_SYSCols.Outputs[Derived Column Output]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output4]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output1]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\Multicast.Inputs[Multicast Input 1]"
                   name="Derived Column Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\DER_NewIDToInvoiceID.Outputs[Derived Column Output]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output3]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output2]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\Union All.Inputs[Union All Input 3]"
                   name="Derived Column Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationD.Outputs[Derived Column Output]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output2]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output3]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\Union All.Inputs[Union All Input 2]"
                   name="Derived Column Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationU.Outputs[Derived Column Output]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output1]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output4]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\Union All.Inputs[Union All Input 1]"
                   name="Derived Column Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationI.Outputs[Derived Column Output]" />
@@ -4305,12 +4305,12 @@ ORDER BY 1</property>
                   name="NOCHANGE"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\SPL_IUDN.Outputs[NOCHANGE]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output1]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\MRJ_SRC_DEST.Inputs[Merge Join Right Input]"
                   name="OLE DB Source Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\SRC_ODS_Invoices.Outputs[OLE DB Source Output]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output1]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\HCT_HashColumns.Inputs[HashColumnsInput]"
                   name="OLE DB Source Output"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\SRC_Invoices.Outputs[OLE DB Source Output]" />
@@ -4320,22 +4320,22 @@ ORDER BY 1</property>
                   name="Output 0"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\Script Component.Outputs[Output 0]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 13]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 1]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationD.Inputs[Derived Column Input]"
                   name="Row Count Output 1"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\RC_DELETE.Outputs[Row Count Output 1]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 12]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 11]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationU.Inputs[Derived Column Input]"
                   name="Row Count Output 1"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\RC_UPDATE.Outputs[Row Count Output 1]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 11]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 12]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationI.Inputs[Derived Column Input]"
                   name="Row Count Output 1"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\RC_INSERT.Outputs[Row Count Output 1]" />
                 <path
-                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 1]"
+                  refId="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 13]"
                   endId="Package\SQC_DataProcessing\DFL_Invoices\SPL_IUDN.Inputs[Conditional Split Input]"
                   name="Row Count Output 1"
                   startId="Package\SQC_DataProcessing\DFL_Invoices\RC_JoinedRows.Outputs[Row Count Output 1]" />
@@ -4434,7 +4434,7 @@ ORDER BY 1</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQLLogExecutionStats"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4511,7 +4511,7 @@ ORDER BY 1</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQLSetStatusFailure"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4534,7 +4534,7 @@ ORDER BY 1</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQLSetStatusFinished"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4976,7 +4976,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 13]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 1]"
           TopLeft="563.75,1054.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -4998,7 +4998,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 12]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 11]"
           TopLeft="346.75,1058.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5020,7 +5020,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 11]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 12]"
           TopLeft="103.75,1057.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5042,7 +5042,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 1]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 13]"
           TopLeft="343.083333333333,828">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5064,7 +5064,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output1]"
           TopLeft="150.75,74">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5284,7 +5284,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output1]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
           TopLeft="666,77.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5344,7 +5344,7 @@ ORDER BY 1</property>
           Id="Package\SQC_DataProcessing\DFL_Invoices\Union All"
           TopLeft="275.833333333333,1224.16666666667" />
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output1]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output4]"
           TopLeft="103,1149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5378,7 +5378,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output2]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output3]"
           TopLeft="352.333333333333,1144.66666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5400,7 +5400,7 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output3]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output2]"
           TopLeft="565.5,1146.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -5460,7 +5460,7 @@ ORDER BY 1</property>
           Id="Package\SQC_DataProcessing\DFL_Invoices\Multicast"
           TopLeft="76.6666666666667,624.166666666667" />
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output4]"
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output1]"
           TopLeft="147,588.166666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
