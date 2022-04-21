@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>BIDWH2022</Name>
-    <LastWriteTime>2022-03-31T07:48:34.7374186Z</LastWriteTime>
+    <LastWriteTime>2022-04-14T08:17:58.4370346Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -38,7 +38,7 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>DW_Invoices.dtsx</Name>
-      <LastWriteTime>2022-03-31T08:33:33.617837Z</LastWriteTime>
+      <LastWriteTime>2022-04-14T08:17:58.3340988Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>

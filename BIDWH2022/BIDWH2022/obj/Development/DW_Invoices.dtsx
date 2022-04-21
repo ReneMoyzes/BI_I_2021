@@ -11,8 +11,8 @@
   DTS:LocaleID="1029"
   DTS:ObjectName="DW_Invoices"
   DTS:PackageType="5"
-  DTS:VersionBuild="57"
-  DTS:VersionGUID="{99023AA8-B10E-401E-B4D7-4B01B9AF9B3E}">
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{28152D06-0C49-4153-92FF-DD20E229B0BC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -50,7 +50,7 @@
       DTS:ObjectName="SourceSystem">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">ODS</DTS:Property>
+        DTS:Name="ParameterValue">ODS2</DTS:Property>
     </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
@@ -139,13 +139,13 @@
       DTS:CreationName=""
       DTS:DTSID="{068E33D3-38CB-4565-B780-4932FDA03171}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;SELECT InvoiceID,_HASH&#xA;FROM ODS.Invoices &#xA;&quot;+ (@[$Package::Reload]?&quot;WHERE 1=2&quot;:&quot;&quot;) + &quot;&#xA;ORDER BY 1&quot; "
+      DTS:Expression="&quot;SELECT InvoiceID,_HASH &#xA;FROM DW.Invoices &#xA;&quot;+ (@[$Package::Reload]?&quot;WHERE 1=2&quot;:&quot;&quot;) + &quot;&#xA;ORDER BY 1&quot; "
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SRCSQLStatement">
       <DTS:VariableValue
-        DTS:DataType="8">SELECT InvoiceID,_HASH
-FROM ODS.Invoices 
+        DTS:DataType="8">SELECT InvoiceID,_HASH 
+FROM DW.Invoices 
 
 ORDER BY 1</DTS:VariableValue>
     </DTS:Variable>
@@ -762,7 +762,7 @@ ORDER BY 1</DTS:VariableValue>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[ODS].[Invoices_Delta]</property>
+                      name="OpenRowset">[DW].[Invoices_Delta]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -837,25 +837,12 @@ ORDER BY 1</DTS:VariableValue>
                           externalMetadataColumnId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[TotalDryItems]"
                           lineageId="Package\SQC_DataProcessing\DFL_Invoices\Union All.Outputs[Union All Output 1].Columns[TotalDryItems]" />
                         <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].Columns[TotalChillerItems]"
-                          cachedDataType="i4"
-                          cachedName="TotalChillerItems"
-                          externalMetadataColumnId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[TotalChillerItems]"
-                          lineageId="Package\SQC_DataProcessing\DFL_Invoices\Union All.Outputs[Union All Output 1].Columns[TotalChillerItems]" />
-                        <inputColumn
                           refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].Columns[LastEditedWhen]"
                           cachedDataType="dbTimeStamp2"
                           cachedName="LastEditedWhen"
                           cachedScale="7"
                           externalMetadataColumnId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[LastEditedWhen]"
                           lineageId="Package\SQC_DataProcessing\DFL_Invoices\Union All.Outputs[Union All Output 1].Columns[LastEditedWhen]" />
-                        <inputColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].Columns[_HASH]"
-                          cachedDataType="wstr"
-                          cachedLength="32"
-                          cachedName="_HASH"
-                          externalMetadataColumnId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[_Hash]"
-                          lineageId="Package\SQC_DataProcessing\DFL_Invoices\Union All.Outputs[Union All Output 1].Columns[_HASH]" />
                         <inputColumn
                           refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].Columns[_LoadDate]"
                           cachedDataType="date"
@@ -887,98 +874,13 @@ ORDER BY 1</DTS:VariableValue>
                           dataType="i4"
                           name="CustomerID" />
                         <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[BillToCustomerID]"
-                          dataType="i4"
-                          name="BillToCustomerID" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[OrderID]"
-                          dataType="i4"
-                          name="OrderID" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryMethodID]"
-                          dataType="i4"
-                          name="DeliveryMethodID" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[ContactPersonID]"
-                          dataType="i4"
-                          name="ContactPersonID" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[AccountsPersonID]"
-                          dataType="i4"
-                          name="AccountsPersonID" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[SalespersonPersonID]"
-                          dataType="i4"
-                          name="SalespersonPersonID" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[PackedByPersonID]"
-                          dataType="i4"
-                          name="PackedByPersonID" />
-                        <externalMetadataColumn
                           refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceDate]"
                           dataType="dbDate"
                           name="InvoiceDate" />
                         <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[CustomerPurchaseOrderNumber]"
-                          dataType="wstr"
-                          length="20"
-                          name="CustomerPurchaseOrderNumber" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[IsCreditNote]"
-                          dataType="bool"
-                          name="IsCreditNote" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[CreditNoteReason]"
-                          dataType="nText"
-                          name="CreditNoteReason" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[Comments]"
-                          dataType="nText"
-                          name="Comments" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryInstructions]"
-                          dataType="nText"
-                          name="DeliveryInstructions" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[InternalComments]"
-                          dataType="nText"
-                          name="InternalComments" />
-                        <externalMetadataColumn
                           refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[TotalDryItems]"
                           dataType="i4"
                           name="TotalDryItems" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[TotalChillerItems]"
-                          dataType="i4"
-                          name="TotalChillerItems" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[DeliveryRun]"
-                          dataType="wstr"
-                          length="5"
-                          name="DeliveryRun" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[RunPosition]"
-                          dataType="wstr"
-                          length="5"
-                          name="RunPosition" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[ReturnedDeliveryData]"
-                          dataType="nText"
-                          name="ReturnedDeliveryData" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedDeliveryTime]"
-                          dataType="dbTimeStamp2"
-                          name="ConfirmedDeliveryTime"
-                          scale="7" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[ConfirmedReceivedBy]"
-                          dataType="wstr"
-                          length="4000"
-                          name="ConfirmedReceivedBy" />
-                        <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[LastEditedBy]"
-                          dataType="i4"
-                          name="LastEditedBy" />
                         <externalMetadataColumn
                           refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[LastEditedWhen]"
                           dataType="dbTimeStamp2"
@@ -994,15 +896,15 @@ ORDER BY 1</DTS:VariableValue>
                           dataType="i4"
                           name="_LoadID" />
                         <externalMetadataColumn
-                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[_Hash]"
-                          dataType="wstr"
-                          length="32"
-                          name="_Hash" />
-                        <externalMetadataColumn
                           refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[_Operation]"
                           dataType="wstr"
                           length="1"
                           name="_Operation" />
+                        <externalMetadataColumn
+                          refId="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta.Inputs[OLE DB Destination Input].ExternalColumns[_HASH]"
+                          dataType="wstr"
+                          length="32"
+                          name="_HASH" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1304,7 +1206,7 @@ where [refTable].[ExtID] = ?</property>
                       dataType="System.Int32"
                       description="Specifies the type of join to perform."
                       name="JoinType"
-                      typeConverter="JoinType">2</property>
+                      typeConverter="JoinType">0</property>
                     <property
                       dataType="System.Int32"
                       description="Specifies the number of columns in the ordering key."
@@ -4376,7 +4278,7 @@ ORDER BY 1</property>
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{0B9B2082-CDA6-44F9-9624-550A9242F9DB}"
-              SQLTask:SqlStatementSource="BEGIN TRAN&#xA;&#xA;DECLARE  @LID AS int&#xA;SET @LID=?&#xA;&#xA;DELETE FROM DST&#xA;FROM [ODS].[Invoices] DST&#xA;INNER JOIN  [ODS].[Invoices_Delta] SRC&#xA;ON SRC.InvoiceID = DST.InvoiceID&#xA;WHERE SRC._LoadID=@LID&#xA;&#xA;INSERT INTO [ODS].[Invoices]&#xA;           ([InvoiceID]&#xA;           ,[CustomerID]&#xA;           ,[BillToCustomerID]&#xA;           ,[OrderID]&#xA;           ,[DeliveryMethodID]&#xA;           ,[ContactPersonID]&#xA;           ,[AccountsPersonID]&#xA;           ,[SalespersonPersonID]&#xA;           ,[PackedByPersonID]&#xA;           ,[InvoiceDate]&#xA;           ,[CustomerPurchaseOrderNumber]&#xA;           ,[IsCreditNote]&#xA;           ,[CreditNoteReason]&#xA;           ,[Comments]&#xA;           ,[DeliveryInstructions]&#xA;           ,[InternalComments]&#xA;           ,[TotalDryItems]&#xA;           ,[TotalChillerItems]&#xA;           ,[DeliveryRun]&#xA;           ,[RunPosition]&#xA;           ,[ReturnedDeliveryData]&#xA;           ,[ConfirmedDeliveryTime]&#xA;           ,[ConfirmedReceivedBy]&#xA;           ,[LastEditedBy]&#xA;           ,[LastEditedWhen]&#xA;           ,[_LoadDate]&#xA;           ,[_LoadID]&#xA;           ,[_Hash])&#xA;SELECT&#xA;           [InvoiceID]&#xA;           ,[CustomerID]&#xA;           ,[BillToCustomerID]&#xA;           ,[OrderID]&#xA;           ,[DeliveryMethodID]&#xA;           ,[ContactPersonID]&#xA;           ,[AccountsPersonID]&#xA;           ,[SalespersonPersonID]&#xA;           ,[PackedByPersonID]&#xA;           ,[InvoiceDate]&#xA;           ,[CustomerPurchaseOrderNumber]&#xA;           ,[IsCreditNote]&#xA;           ,[CreditNoteReason]&#xA;           ,[Comments]&#xA;           ,[DeliveryInstructions]&#xA;           ,[InternalComments]&#xA;           ,[TotalDryItems]&#xA;           ,[TotalChillerItems]&#xA;           ,[DeliveryRun]&#xA;           ,[RunPosition]&#xA;           ,[ReturnedDeliveryData]&#xA;           ,[ConfirmedDeliveryTime]&#xA;           ,[ConfirmedReceivedBy]&#xA;           ,[LastEditedBy]&#xA;           ,[LastEditedWhen]&#xA;           ,[_LoadDate]&#xA;           ,[_LoadID]&#xA;           ,[_Hash]&#xA;FROM [ODS].[Invoices_Delta]&#xA;WHERE _Operation IN ('I','U')&#xA;AND&#xA;[_LoadID]=@LID&#xA;&#xA;COMMIT TRAN&#xA;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              SQLTask:SqlStatementSource="BEGIN TRAN&#xA;&#xA;DECLARE  @LID AS int&#xA;SET @LID=?&#xA;&#xA;DELETE FROM DST&#xA;FROM [DW].[Invoices] DST&#xA;INNER JOIN  [DW].[Invoices_Delta] SRC&#xA;ON SRC.InvoiceID = DST.InvoiceID&#xA;WHERE SRC._LoadID=@LID&#xA;&#xA;INSERT INTO [DW].[Invoices]&#xA;           ([InvoiceID]&#xA;           ,[CustomerID]&#xA;           ,[InvoiceDate]&#xA;           ,[TotalDryItems]&#xA;           ,[LastEditedWhen]&#xA;           ,[_LoadDate]&#xA;           ,[_LoadID]&#xA;           ,[_HASH])&#xA;SELECT&#xA;           [InvoiceID]&#xA;           ,[CustomerID]&#xA;           ,[InvoiceDate]&#xA;           ,[TotalDryItems]&#xA;           ,[LastEditedWhen]&#xA;           ,[_LoadDate]&#xA;           ,[_LoadID]&#xA;           ,[_HASH]&#xA;FROM [DW].[Invoices_Delta]&#xA;WHERE _Operation IN ('I','U')&#xA;AND&#xA;[_LoadID]=@LID&#xA;&#xA;COMMIT TRAN&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
                 SQLTask:DtsVariableName="User::LoadID"
@@ -4434,7 +4336,7 @@ ORDER BY 1</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQLLogExecutionStats"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4511,7 +4413,7 @@ ORDER BY 1</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQLSetStatusFailure"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4534,7 +4436,7 @@ ORDER BY 1</property>
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SQLSetStatusFinished"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4830,105 +4732,97 @@ ORDER BY 1</property>
           Id="Package\SQC_DataProcessing\DFL_Invoices\DST_Delta"
           TopLeft="270,1313.16666666667" />
         <NodeLayout
-          Size="153,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_NOCHANGE"
-          TopLeft="596,909" />
-        <NodeLayout
           Size="113,42"
           Id="Package\SQC_DataProcessing\DFL_Invoices\Lookup"
           TopLeft="91,375" />
-        <NodeLayout
-          Size="134,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_INSERT"
-          TopLeft="37.5,1015.5" />
-        <NodeLayout
-          Size="143,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\SRC_Invoices"
-          TopLeft="78,32" />
-        <NodeLayout
-          Size="169,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\SRC_ODS_Invoices"
-          TopLeft="581.5,35.5" />
-        <NodeLayout
-          Size="127,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\SPL_IUDN"
-          TopLeft="276,908" />
-        <NodeLayout
-          Size="135,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_DELETE"
-          TopLeft="494.5,1012.5" />
         <NodeLayout
           Size="152,42"
           Id="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationU"
           TopLeft="273.5,1102.66666666667" />
         <NodeLayout
-          Size="168,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\HCT_HashColumns"
-          TopLeft="68,110" />
+          Size="130,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\SORT_KEY"
+          TopLeft="135.714285714286,696.547619047619" />
         <NodeLayout
-          Size="149,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationI"
-          TopLeft="28.5,1107.5" />
+          Size="120,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\Multicast"
+          TopLeft="76.6666666666667,624.166666666667" />
         <NodeLayout
-          Size="163,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\Script Component"
-          TopLeft="72,464" />
-        <NodeLayout
-          Size="153,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_JoinedRows"
-          TopLeft="270.166666666667,786" />
-        <NodeLayout
-          Size="142,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\DER_SYSCols"
-          TopLeft="82,289" />
-        <NodeLayout
-          Size="137,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_UPDATE"
-          TopLeft="275.5,1016.5" />
+          Size="127,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\SPL_IUDN"
+          TopLeft="276,908" />
         <NodeLayout
           Size="152,42"
           Id="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationD"
           TopLeft="489.5,1104.5" />
         <NodeLayout
+          Size="149,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\DC_OperationI"
+          TopLeft="28.5,1107.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\MRJ_SRC_DEST"
+          TopLeft="275.595238095238,693.333333333333" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\Script Component"
+          TopLeft="72,464" />
+        <NodeLayout
+          Size="137,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_UPDATE"
+          TopLeft="275.5,1016.5" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\HCT_HashColumns"
+          TopLeft="68,110" />
+        <NodeLayout
+          Size="143,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\SRC_Invoices"
+          TopLeft="78,32" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\DER_SYSCols"
+          TopLeft="82,289" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_DELETE"
+          TopLeft="494.5,1012.5" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\SQL_SAVE_EXTID_ID_MAP"
+          TopLeft="22.4999999999999,893.333333333333" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_NOCHANGE"
+          TopLeft="596,909" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\SRC_ODS_Invoices"
+          TopLeft="581.5,35.5" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\Union All"
+          TopLeft="275.833333333333,1224.16666666667" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_JoinedRows"
+          TopLeft="270.166666666667,786" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\DER_NewIDToInvoiceID"
+          TopLeft="50,546.166666666667" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\Conditional Split"
+          TopLeft="41.6666666666667,790" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\SQC_DataProcessing\DFL_Invoices\RC_INSERT"
+          TopLeft="37.5,1015.5" />
+        <NodeLayout
           Size="130,42"
           Id="Package\SQC_DataProcessing\DFL_Invoices\RC_Source"
           TopLeft="86,192" />
-        <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[DELETE]"
-          TopLeft="369.25,950">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="192.75,62.5"
-              Start="0,0"
-              End="192.75,55">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,17.6902313624679" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,17.6902313624679"
-                    Point2="0,21.6902313624679"
-                    Point3="4,21.6902313624679" />
-                  <mssgle:LineSegment
-                    End="188.75,21.6902313624679" />
-                  <mssgle:CubicBezierSegment
-                    Point1="188.75,21.6902313624679"
-                    Point2="192.75,21.6902313624679"
-                    Point3="192.75,25.6902313624679" />
-                  <mssgle:LineSegment
-                    End="192.75,55" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="78.69205078125,26.6902313624679,35.3658984375,9.2705078125"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[UPDATE]"
           TopLeft="341.75,950">
@@ -4954,6 +4848,64 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Union All Output 1]"
+          TopLeft="335.416666666667,1266.16666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.9999999999998"
+              Start="0,0"
+              End="0,39.4999999999998">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.4999999999998" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,11.7499999999999,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Sort Output]"
+          TopLeft="200.714285714286,738.547619047619">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="127.547619047619,-3.21428571428601"
+              Start="0,0"
+              End="127.547619047619,4.28571428571399">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.5"
+                    Point2="0,22.5"
+                    Point3="4,22.5" />
+                  <mssgle:LineSegment
+                    End="123.547619047619,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="123.547619047619,22.5"
+                    Point2="127.547619047619,22.5"
+                    Point3="127.547619047619,18.5" />
+                  <mssgle:LineSegment
+                    End="127.547619047619,4.28571428571399" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 14]"
           TopLeft="152,234">
           <EdgeLayout.Curve>
@@ -4976,8 +4928,30 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 1]"
-          TopLeft="563.75,1054.5">
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 13]"
+          TopLeft="343.083333333333,828">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80"
+              Start="0,0"
+              End="0,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 12]"
+          TopLeft="103.75,1057.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -5020,8 +4994,8 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 12]"
-          TopLeft="103.75,1057.5">
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 1]"
+          TopLeft="563.75,1054.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -5042,19 +5016,19 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Row Count Output 13]"
-          TopLeft="343.083333333333,828">
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Output 0]"
+          TopLeft="150.25,506">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,80"
+              EndConnector="0,40.1666666666666"
               Start="0,0"
-              End="0,72.5">
+              End="0,32.6666666666666">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,72.5" />
+                    End="0,32.6666666666666" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5086,6 +5060,40 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
+          TopLeft="666,77.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-313.404761904762,615.833333333333"
+              Start="0,0"
+              End="-313.404761904762,608.333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,303.916666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,303.916666666667"
+                    Point2="0,307.916666666667"
+                    Point3="-4,307.916666666667" />
+                  <mssgle:LineSegment
+                    End="-309.404761904762,307.916666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-309.404761904762,307.916666666667"
+                    Point2="-313.404761904762,307.916666666667"
+                    Point3="-313.404761904762,311.916666666667" />
+                  <mssgle:LineSegment
+                    End="-313.404761904762,608.333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[NOCHANGE]"
           TopLeft="403,929.5">
           <EdgeLayout.Curve>
@@ -5105,8 +5113,122 @@ ORDER BY 1</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="66.55205078125,5,52.3958984375,9.5732421875"
+              BoundingBox="57.6833984375,5,70.133203125,16"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[NewID]"
+          TopLeft="122.583333333333,832">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.3333333333335"
+              Start="0,0"
+              End="0,53.8333333333335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.8333333333335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.4062109375,22.2179361979167,30.812421875,9.3974609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Multicast Output 2]"
+          TopLeft="118.583333333333,666.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,123.833333333333"
+              Start="0,0"
+              End="0,116.333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,116.333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Multicast Output 1]"
+          TopLeft="155.333333333333,666.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45.3809523809524,30.3809523809523"
+              Start="0,0"
+              End="45.3809523809524,22.8809523809523">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.39223057644107" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.39223057644107"
+                    Point2="0,12.3922305764411"
+                    Point3="4,12.3922305764411" />
+                  <mssgle:LineSegment
+                    End="41.3809523809524,12.3922305764411" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.3809523809524,12.3922305764411"
+                    Point2="45.3809523809524,12.3922305764411"
+                    Point3="45.3809523809524,16.3922305764411" />
+                  <mssgle:LineSegment
+                    End="45.3809523809524,22.8809523809523" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Merge Join Output]"
+          TopLeft="376.928571428571,735.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-30.2619047619043,50.666666666667"
+              Start="0,0"
+              End="-30.2619047619043,43.166666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5792630676951" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5792630676951"
+                    Point2="0,20.5792630676951"
+                    Point3="-4,20.5792630676951" />
+                  <mssgle:LineSegment
+                    End="-26.2619047619043,20.5792630676951" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-26.2619047619043,20.5792630676951"
+                    Point2="-30.2619047619043,20.5792630676951"
+                    Point3="-30.2619047619043,24.5792630676951" />
+                  <mssgle:LineSegment
+                    End="-30.2619047619043,43.166666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -5191,158 +5313,6 @@ ORDER BY 1</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output]"
-          TopLeft="150.25,331">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,44"
-              Start="0,0"
-              End="0,36.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,36.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="194,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\DER_NewIDToInvoiceID"
-          TopLeft="50,546.166666666667" />
-        <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Output 0]"
-          TopLeft="150.25,506">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,40.1666666666666"
-              Start="0,0"
-              End="0,32.6666666666666">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.6666666666666" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="130,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\SORT_KEY"
-          TopLeft="135.714285714286,696.547619047619" />
-        <NodeLayout
-          Size="154,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\MRJ_SRC_DEST"
-          TopLeft="275.595238095238,693.333333333333" />
-        <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Sort Output]"
-          TopLeft="200.714285714286,738.547619047619">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="127.547619047619,-3.21428571428567"
-              Start="0,0"
-              End="127.547619047619,4.28571428571433">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.5"
-                    Point2="0,22.5"
-                    Point3="4,22.5" />
-                  <mssgle:LineSegment
-                    End="123.547619047619,22.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="123.547619047619,22.5"
-                    Point2="127.547619047619,22.5"
-                    Point3="127.547619047619,18.5" />
-                  <mssgle:LineSegment
-                    End="127.547619047619,4.28571428571433" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="55.7738095238095,27.5,16,16"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[OLE DB Source Output]"
-          TopLeft="666,77.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-313.404761904762,615.833333333333"
-              Start="0,0"
-              End="-313.404761904762,608.333333333333">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,303.916666666667" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,303.916666666667"
-                    Point2="0,307.916666666667"
-                    Point3="-4,307.916666666667" />
-                  <mssgle:LineSegment
-                    End="-309.404761904762,307.916666666667" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-309.404761904762,307.916666666667"
-                    Point2="-313.404761904762,307.916666666667"
-                    Point3="-313.404761904762,311.916666666667" />
-                  <mssgle:LineSegment
-                    End="-313.404761904762,608.333333333333" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Merge Join Output]"
-          TopLeft="349.630952380952,735.333333333333">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,50.6666666666666"
-              Start="0,0"
-              End="0,43.1666666666666">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,43.1666666666666" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="121,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\Union All"
-          TopLeft="275.833333333333,1224.16666666667" />
         <EdgeLayout
           Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output4]"
           TopLeft="103,1149.5">
@@ -5434,32 +5404,6 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Union All Output 1]"
-          TopLeft="335.416666666667,1266.16666666667">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,46.9999999999998"
-              Start="0,0"
-              End="0,39.4999999999998">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,39.4999999999998" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="120,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\Multicast"
-          TopLeft="76.6666666666667,624.166666666667" />
-        <EdgeLayout
           Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output1]"
           TopLeft="147,588.166666666667">
           <EdgeLayout.Curve>
@@ -5494,31 +5438,19 @@ ORDER BY 1</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Multicast Output 1]"
-          TopLeft="155.333333333333,666.166666666667">
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Derived Column Output]"
+          TopLeft="150.25,331">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="45.3809523809524,30.3809523809523"
+              EndConnector="0,44"
               Start="0,0"
-              End="45.3809523809524,22.8809523809523">
+              End="0,36.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.39223057644107" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,8.39223057644107"
-                    Point2="0,12.3922305764411"
-                    Point3="4,12.3922305764411" />
-                  <mssgle:LineSegment
-                    End="41.3809523809524,12.3922305764411" />
-                  <mssgle:CubicBezierSegment
-                    Point1="41.3809523809524,12.3922305764411"
-                    Point2="45.3809523809524,12.3922305764411"
-                    Point3="45.3809523809524,16.3922305764411" />
-                  <mssgle:LineSegment
-                    End="45.3809523809524,22.8809523809523" />
+                    End="0,36.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5527,57 +5459,39 @@ ORDER BY 1</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="155,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\Conditional Split"
-          TopLeft="41.6666666666667,790" />
         <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[Multicast Output 2]"
-          TopLeft="118.583333333333,666.166666666667">
+          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[DELETE]"
+          TopLeft="369.25,950">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,123.833333333333"
+              EndConnector="192.75,62.5"
               Start="0,0"
-              End="0,116.333333333333">
+              End="192.75,55">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,116.333333333333" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="207,42"
-          Id="Package\SQC_DataProcessing\DFL_Invoices\SQL_SAVE_EXTID_ID_MAP"
-          TopLeft="22.4999999999999,893.333333333333" />
-        <EdgeLayout
-          Id="Package\SQC_DataProcessing\DFL_Invoices.Paths[NewID]"
-          TopLeft="122.583333333333,832">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,61.3333333333335"
-              Start="0,0"
-              End="0,53.8333333333335">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
+                    End="0,17.6902313624679" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.6902313624679"
+                    Point2="0,21.6902313624679"
+                    Point3="4,21.6902313624679" />
                   <mssgle:LineSegment
-                    End="0,53.8333333333335" />
+                    End="188.75,21.6902313624679" />
+                  <mssgle:CubicBezierSegment
+                    Point1="188.75,21.6902313624679"
+                    Point2="192.75,21.6902313624679"
+                    Point3="192.75,25.6902313624679" />
+                  <mssgle:LineSegment
+                    End="192.75,55" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-15.4062109375,22.2179361979167,30.812421875,9.3974609375"
+              BoundingBox="78.69205078125,26.6902313624679,35.3658984375,9.2705078125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -5603,7 +5517,7 @@ ORDER BY 1</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -5613,7 +5527,7 @@ ORDER BY 1</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
