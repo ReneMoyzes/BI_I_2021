@@ -1,0 +1,620 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/17/2022 8:23:25 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="X230"
+  DTS:CreatorName="X230\Rene.Moyzes"
+  DTS:DTSID="{204C6436-F3F2-486F-91C5-CD757305F4BB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1029"
+  DTS:ObjectName="DW_Control_ProcessTables"
+  DTS:PackageType="5"
+  DTS:VersionBuild="78"
+  DTS:VersionGUID="{8DAE7777-D004-4B12-97D8-545EC23D09AD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{CB8D2CD0-3B57-4FDB-BDC1-845F7D18F1BD}"
+      DTS:ObjectName="SourceSystem">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">ODS2</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D2DACED5-4B36-4D1A-A76A-0A6F08E2B084}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FinishedWithSuccess">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0176384F-6043-489C-A5BB-97FF3379D280}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LoadID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8D1C61D6-750B-4A6D-9432-F669D721815C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="MaxStep">
+      <DTS:VariableValue
+        DTS:DataType="3">3</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8B277304-BFA9-49EB-845E-DFAB0A802F80}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Step">
+      <DTS:VariableValue
+        DTS:DataType="3">1</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\SQC_DataProcessing"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{45598F76-DCC9-475B-8119-BFE600B45397}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQC_DataProcessing">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SQC_DataProcessing\FLP Try"
+          DTS:AssignExpression="@Step=@Step+1"
+          DTS:CreationName="STOCK:FORLOOP"
+          DTS:Description="For Loop Container"
+          DTS:DTSID="{3CF6209E-93F3-4DEB-94E0-7890D480A0F2}"
+          DTS:EvalExpression="@Step&lt;=@MaxStep &amp;&amp; !@FinishedWithSuccess"
+          DTS:ExecutableType="STOCK:FORLOOP"
+          DTS:LocaleID="-1"
+          DTS:MaxConcurrent="1"
+          DTS:MaxErrorCount="0"
+          DTS:ObjectName="FLP Try">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\SQC_DataProcessing\FLP Try\EXP_SetSuccess"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{78575A1D-97A7-4DCB-865F-51F11A2FB100}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="EXP_SetSuccess"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::FinishedWithSuccess]=True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\SQC_DataProcessing\FLP Try\Sequence Container"
+              DTS:CreationName="STOCK:SEQUENCE"
+              DTS:Description="Sequence Container"
+              DTS:DTSID="{F07B4AF6-9B13-4705-A36E-F8749820AE96}"
+              DTS:ExecutableType="STOCK:SEQUENCE"
+              DTS:LocaleID="-1"
+              DTS:MaxErrorCount="0"
+              DTS:ObjectName="Sequence Container">
+              <DTS:Variables />
+              <DTS:Executables>
+                <DTS:Executable
+                  DTS:refId="Package\SQC_DataProcessing\FLP Try\Sequence Container\ProcessTable1"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Execute Package Task"
+                  DTS:DTSID="{08ca1384-1858-486c-a715-8f39227e164d}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="ProcessTable1"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:DTSID="{e5b309a3-0f21-4a13-a582-4fadaf8af260}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="User"
+                      DTS:ObjectName="ReturnSuccessOnStep">
+                      <DTS:VariableValue
+                        DTS:DataType="3">1</DTS:VariableValue>
+                    </DTS:Variable>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:DTSID="{45bfacca-ee46-4db4-8350-4298d5e94f7c}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="User"
+                      DTS:ObjectName="SleepInSeconds">
+                      <DTS:VariableValue
+                        DTS:DataType="3">5</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>DW_ProcessTable.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>SleepInSeconds</ParameterName>
+                        <BindedVariableOrParameterName>User::SleepInSeconds</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>Step</ParameterName>
+                        <BindedVariableOrParameterName>User::Step</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>ReturnSuccessOnStep</ParameterName>
+                        <BindedVariableOrParameterName>User::ReturnSuccessOnStep</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\SQC_DataProcessing\FLP Try\Sequence Container\ProcessTable1 1"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Execute Package Task"
+                  DTS:DTSID="{ae34340a-10c1-49ff-a97f-e38e67094b6d}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="ProcessTable1 1"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:DTSID="{4c85fa0f-43ba-42f1-9981-5a9ad4cd55a3}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="User"
+                      DTS:ObjectName="ReturnSuccessOnStep">
+                      <DTS:VariableValue
+                        DTS:DataType="3">1</DTS:VariableValue>
+                    </DTS:Variable>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:DTSID="{ed238012-a347-4163-a233-46288ddde29d}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="User"
+                      DTS:ObjectName="SleepInSeconds">
+                      <DTS:VariableValue
+                        DTS:DataType="3">20</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>DW_ProcessTable.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>SleepInSeconds</ParameterName>
+                        <BindedVariableOrParameterName>User::SleepInSeconds</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>Step</ParameterName>
+                        <BindedVariableOrParameterName>User::Step</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>ReturnSuccessOnStep</ParameterName>
+                        <BindedVariableOrParameterName>User::ReturnSuccessOnStep</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+                <DTS:Executable
+                  DTS:refId="Package\SQC_DataProcessing\FLP Try\Sequence Container\ProcessTable2"
+                  DTS:CreationName="Microsoft.ExecutePackageTask"
+                  DTS:Description="Execute Package Task"
+                  DTS:DTSID="{c728d619-5954-476b-ad45-0fa7a0deb006}"
+                  DTS:ExecutableType="Microsoft.ExecutePackageTask"
+                  DTS:LocaleID="-1"
+                  DTS:ObjectName="ProcessTable2"
+                  DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+                  <DTS:Variables>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:DTSID="{1a758ac3-28cc-4e23-b1f3-547fbe62c9d9}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="User"
+                      DTS:ObjectName="ReturnSuccessOnStep">
+                      <DTS:VariableValue
+                        DTS:DataType="3">2</DTS:VariableValue>
+                    </DTS:Variable>
+                    <DTS:Variable
+                      DTS:CreationName=""
+                      DTS:DTSID="{d2ac6178-eecd-47a1-a87a-c9f261529caf}"
+                      DTS:IncludeInDebugDump="6789"
+                      DTS:Namespace="User"
+                      DTS:ObjectName="SleepInSeconds">
+                      <DTS:VariableValue
+                        DTS:DataType="3">10</DTS:VariableValue>
+                    </DTS:Variable>
+                  </DTS:Variables>
+                  <DTS:ObjectData>
+                    <ExecutePackageTask>
+                      <UseProjectReference>True</UseProjectReference>
+                      <PackageName>DW_ProcessTable.dtsx</PackageName>
+                      <ParameterAssignment>
+                        <ParameterName>SleepInSeconds</ParameterName>
+                        <BindedVariableOrParameterName>User::SleepInSeconds</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>Step</ParameterName>
+                        <BindedVariableOrParameterName>User::Step</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                      <ParameterAssignment>
+                        <ParameterName>ReturnSuccessOnStep</ParameterName>
+                        <BindedVariableOrParameterName>User::ReturnSuccessOnStep</BindedVariableOrParameterName>
+                      </ParameterAssignment>
+                    </ExecutePackageTask>
+                  </DTS:ObjectData>
+                </DTS:Executable>
+              </DTS:Executables>
+              <DTS:PrecedenceConstraints>
+                <DTS:PrecedenceConstraint
+                  DTS:refId="Package\SQC_DataProcessing\FLP Try\Sequence Container.PrecedenceConstraints[Constraint]"
+                  DTS:CreationName=""
+                  DTS:DTSID="{aaf9c040-66f5-496e-bd07-0af66790cdc4}"
+                  DTS:From="Package\SQC_DataProcessing\FLP Try\Sequence Container\ProcessTable1"
+                  DTS:LogicalAnd="True"
+                  DTS:ObjectName="Constraint"
+                  DTS:To="Package\SQC_DataProcessing\FLP Try\Sequence Container\ProcessTable1 1" />
+              </DTS:PrecedenceConstraints>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\SQC_DataProcessing\FLP Try.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{8CF05E0F-47D0-4627-94C0-72934DC7F3D5}"
+              DTS:From="Package\SQC_DataProcessing\FLP Try\Sequence Container"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\SQC_DataProcessing\FLP Try\EXP_SetSuccess" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SQC_DataProcessing\Foreach Loop Container"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{9FB145AE-62AC-45CD-BDD9-BE6278EE92B0}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Foreach Loop Container">
+          <DTS:Variables />
+          <DTS:Executables />
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQLSetStatusFailure"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EF6BEE05-020E-4080-8053-EEDA306CE181}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQLSetStatusFailure"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4DCBED33-BC63-46D3-A0FB-1B9F73E118B6}"
+          SQLTask:SqlStatementSource="ETL.SetExecutionStatus ?,'Failure'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::LoadID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQLSetStatusFinished"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{14A3E06C-B085-41C5-A077-E459BC413A9C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQLSetStatusFinished"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4DCBED33-BC63-46D3-A0FB-1B9F73E118B6}"
+          SQLTask:SqlStatementSource="ETL.SetExecutionStatus ?,'Finished'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::LoadID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL_GetEXECID"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5F6D675A-918D-4B78-B42D-72FBB9F9236B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL_GetEXECID"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4DCBED33-BC63-46D3-A0FB-1B9F73E118B6}"
+          SQLTask:SqlStatementSource="EXEC ETL.GetExecutionID ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ID"
+            SQLTask:DtsVariableName="User::LoadID" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3A2247D3-BEFA-47A5-ABBD-CC90816B5A1B}"
+      DTS:From="Package\SQL_GetEXECID"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SQC_DataProcessing" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A62F17F8-83ED-4F61-B6EA-EB60E4DFD62E}"
+      DTS:From="Package\SQC_DataProcessing"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\SQLSetStatusFinished" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{28785971-C24A-4695-B74C-8CC0BB10EB58}"
+      DTS:From="Package\SQC_DataProcessing"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\SQLSetStatusFailure"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="146,42"
+          Id="Package\SQC_DataProcessing\FLP Try\Sequence Container\ProcessTable1"
+          TopLeft="23,102.5" />
+        <EdgeLayout
+          Id="Package\SQC_DataProcessing\FLP Try\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="95.25,144.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="146,42"
+          Id="Package\SQC_DataProcessing\FLP Try\Sequence Container\ProcessTable2"
+          TopLeft="21,25.5" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\SQC_DataProcessing\FLP Try\Sequence Container\ProcessTable1 1"
+          TopLeft="17,182.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="205,274"
+          Size="205,317"
+          Id="Package\SQC_DataProcessing\FLP Try\Sequence Container"
+          TopLeft="35,28" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\SQC_DataProcessing\FLP Try\EXP_SetSuccess"
+          TopLeft="293,161" />
+        <EdgeLayout
+          Id="Package\SQC_DataProcessing\FLP Try.PrecedenceConstraints[Constraint]"
+          TopLeft="240,184.25">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="53,0"
+              Start="0,0"
+              End="45.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="45.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="452,398"
+          Size="452,441"
+          Id="Package\SQC_DataProcessing\FLP Try"
+          TopLeft="141,56" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="205,55"
+          Size="214,98"
+          Id="Package\SQC_DataProcessing\Foreach Loop Container"
+          TopLeft="57,184" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="614,552"
+          Size="614,595"
+          Id="Package\SQC_DataProcessing"
+          TopLeft="171,146" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\SQL_GetEXECID"
+          TopLeft="301,34" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\SQLSetStatusFailure"
+          TopLeft="458,662" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\SQLSetStatusFinished"
+          TopLeft="164,662" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="379,76">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99,70"
+              Start="0,0"
+              End="99,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31"
+                    Point2="0,35"
+                    Point3="4,35" />
+                  <mssgle:LineSegment
+                    End="95,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="95,35"
+                    Point2="99,35"
+                    Point3="99,39" />
+                  <mssgle:LineSegment
+                    End="99,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="579,741">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-34,-79"
+              Start="0,0"
+              End="-34,-71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-27.7231968810916" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-27.7231968810916"
+                    Point2="0,-31.7231968810916"
+                    Point3="-4,-31.7231968810916" />
+                  <mssgle:LineSegment
+                    End="-30,-31.7231968810916" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-30,-31.7231968810916"
+                    Point2="-34,-31.7231968810916"
+                    Point3="-34,-35.7231968810916" />
+                  <mssgle:LineSegment
+                    End="-34,-71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-32.24134765625,-26.7231968810916,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="377,741">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-122.5,-79"
+              Start="0,0"
+              End="-122.5,-71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-27.7231968810916" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-27.7231968810916"
+                    Point2="0,-31.7231968810916"
+                    Point3="-4,-31.7231968810916" />
+                  <mssgle:LineSegment
+                    End="-118.5,-31.7231968810916" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-118.5,-31.7231968810916"
+                    Point2="-122.5,-31.7231968810916"
+                    Point3="-122.5,-35.7231968810916" />
+                  <mssgle:LineSegment
+                    End="-122.5,-71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

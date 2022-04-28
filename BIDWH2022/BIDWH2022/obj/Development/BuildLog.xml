@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>BIDWH2022</Name>
-    <LastWriteTime>2022-04-14T08:17:58.4370346Z</LastWriteTime>
+    <LastWriteTime>2022-04-21T07:36:46.7288137Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -38,12 +38,22 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>DW_Invoices.dtsx</Name>
-      <LastWriteTime>2022-04-14T08:17:58.3340988Z</LastWriteTime>
+      <LastWriteTime>2022-04-21T07:59:31.0538371Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>ODS_Invoices CMD.dtsx</Name>
       <LastWriteTime>2022-03-31T07:48:34.7092564Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>DW_ProcessTable.dtsx</Name>
+      <LastWriteTime>2022-04-21T08:14:31.825064Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>DW_Control_ProcessTables.dtsx</Name>
+      <LastWriteTime>2022-04-21T08:14:31.8090729Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
